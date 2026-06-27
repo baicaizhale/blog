@@ -2,7 +2,7 @@ import "./styles/index.css";
 import type { ThemeComponents } from "@/features/theme/contract/components";
 import { config } from "./config";
 import { getClaudeThemeStyle } from "./theme-style";
-import { Toaster } from "./components/toaster";
+import Toaster from "@/components/ui/toaster";
 import { PublicLayout } from "./layouts/public-layout";
 import { AuthLayout } from "./layouts/auth-layout";
 import { UserLayout } from "./layouts/user-layout";

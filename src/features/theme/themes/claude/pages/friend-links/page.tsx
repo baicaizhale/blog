@@ -2,18 +2,19 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import type { FriendLinksPageProps } from "@/features/theme/contract/pages";
 import { m } from "@/paraglide/messages";
+import { FriendLinkCard } from "./friend-link-card";
 
 export function FriendLinksPage({ links }: FriendLinksPageProps) {
   return (
-    <div className="w-full max-w-3xl mx-auto pb-20 px-6">
-      <header className="py-16 md:py-20 space-y-4">
+    <div className="w-full max-w-3xl mx-auto pb-20 px-6 md:px-0">
+      <header className="py-12 md:py-20 space-y-6">
         <h1
           className="text-4xl md:text-5xl font-serif text-[var(--claude-ink)] leading-tight"
           style={{ fontWeight: 400, letterSpacing: "-0.03em" }}
         >
           {m.friend_links_title()}
         </h1>
-        <p className="text-lg text-[var(--claude-body)] leading-relaxed max-w-xl">
+        <p className="max-w-xl text-lg text-[var(--claude-body)] leading-relaxed">
           {m.friend_links_desc()}
         </p>
       </header>
@@ -29,35 +30,9 @@ export function FriendLinksPage({ links }: FriendLinksPageProps) {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-4">
             {links.map((link) => (
-              <a
-                key={link.id}
-                href={link.siteUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="group p-5 rounded-[var(--claude-radius-lg)] border border-[var(--claude-hairline)] hover:border-[var(--claude-primary)] bg-[var(--claude-canvas)] transition-all"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <h3
-                      className="font-serif text-lg text-[var(--claude-ink)] group-hover:text-[var(--claude-primary)] transition-colors"
-                      style={{ fontWeight: 400 }}
-                    >
-                      {link.siteName}
-                    </h3>
-                    {link.description && (
-                      <p className="mt-1 text-sm text-[var(--claude-body)] line-clamp-2">
-                        {link.description}
-                      </p>
-                    )}
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="shrink-0 text-[var(--claude-muted)] group-hover:text-[var(--claude-primary)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-                  />
-                </div>
-              </a>
+              <FriendLinkCard key={link.id} link={link} />
             ))}
           </div>
         )}
@@ -75,10 +50,13 @@ export function FriendLinksPage({ links }: FriendLinksPageProps) {
 
         <Link
           to="/submit-friend-link"
-          className="claude-btn-secondary text-sm"
+          className="text-sm font-mono text-[var(--claude-muted)] hover:text-[var(--claude-ink)] transition-colors flex items-center gap-2 group"
         >
           <span>{m.friend_links_apply()}</span>
-          <ArrowUpRight size={14} />
+          <ArrowUpRight
+            size={14}
+            className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+          />
         </Link>
       </div>
     </div>

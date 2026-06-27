@@ -1,15 +1,45 @@
 import { Link } from "@tanstack/react-router";
 import type { RegisterPageProps } from "@/features/theme/contract/pages";
 import { m } from "@/paraglide/messages";
+import { RegisterForm } from "./form";
 
 export function RegisterPage({
-  isEmailConfigured,
   registerForm,
   turnstileElement,
 }: RegisterPageProps) {
+  if (registerForm.isSuccess) {
+    return (
+      <div className="text-center space-y-8 animate-in fade-in duration-500">
+        <div className="space-y-4">
+          <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--claude-muted)]">
+            [ {m.register_success_label()} ]
+          </p>
+          <h3
+            className="text-xl font-serif text-[var(--claude-ink)]"
+            style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
+          >
+            {m.register_success_title()}
+          </h3>
+          <p className="text-sm text-[var(--claude-body)] leading-relaxed">
+            {m.register_success_desc()}
+          </p>
+        </div>
+        <Link
+          to="/login"
+          className="block w-full py-4 border border-[var(--claude-hairline)] text-[10px] font-mono uppercase tracking-[0.3em] hover:border-[var(--claude-ink)] transition-all text-center"
+        >
+          {m.register_back_to_login()}
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
-      <header className="text-center space-y-2">
+    <div className="space-y-12">
+      <header className="text-center space-y-3">
+        <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-[var(--claude-muted)]">
+          [ {m.register_label()} ]
+        </p>
         <h1
           className="text-2xl font-serif text-[var(--claude-ink)]"
           style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
@@ -18,71 +48,19 @@ export function RegisterPage({
         </h1>
       </header>
 
-      <div className="space-y-6">
-        {isEmailConfigured ? (
-          registerForm.isSuccess ? (
-            <div className="text-center py-8 space-y-3">
-              <p className="text-[var(--claude-body)]">{m.register_success_desc()}</p>
-            </div>
-          ) : (
-            <form onSubmit={registerForm.handleSubmit} className="space-y-4">
-              <div>
-                <input
-                  {...registerForm.register("name")}
-                  placeholder={m.register_nickname_placeholder()}
-                  className="claude-input"
-                />
-                {registerForm.errors.name && (
-                  <p className="text-xs text-[var(--claude-error)] mt-1">{registerForm.errors.name.message}</p>
-                )}
-              </div>
-              <div>
-                <input
-                  {...registerForm.register("email")}
-                  type="email"
-                  placeholder={m.login_email_placeholder()}
-                  className="claude-input"
-                />
-                {registerForm.errors.email && (
-                  <p className="text-xs text-[var(--claude-error)] mt-1">{registerForm.errors.email.message}</p>
-                )}
-              </div>
-              <div>
-                <input
-                  {...registerForm.register("password")}
-                  type="password"
-                  placeholder={m.login_password_placeholder()}
-                  className="claude-input"
-                />
-                {registerForm.errors.password && (
-                  <p className="text-xs text-[var(--claude-error)] mt-1">{registerForm.errors.password.message}</p>
-                )}
-              </div>
-              <button
-                type="submit"
-                disabled={registerForm.isSubmitting}
-                className="claude-btn-primary w-full"
-              >
-                {registerForm.isSubmitting ? "Loading..." : m.register_submit()}
-              </button>
-            </form>
-          )
-        ) : (
-          <p className="text-sm text-[var(--claude-muted)] text-center">
-            {m.login_only_third_party()}
-          </p>
-        )}
+      <div className="space-y-10">
+        <RegisterForm form={registerForm} />
 
         {turnstileElement}
 
-        <div className="text-center pt-2">
-          <p className="text-sm text-[var(--claude-muted)]">
+        <div className="text-center pt-4">
+          <p className="text-[10px] font-mono text-[var(--claude-muted)] tracking-wider">
             {m.register_have_account()}{" "}
             <Link
               to="/login"
-              className="text-[var(--claude-primary)] hover:text-[var(--claude-primary-active)] transition-colors"
+              className="text-[var(--claude-ink)] hover:opacity-70 transition-opacity ml-1"
             >
-              {m.register_go_to_login()}
+              [ {m.register_go_to_login()} ]
             </Link>
           </p>
         </div>
