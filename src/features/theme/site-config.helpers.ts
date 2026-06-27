@@ -12,6 +12,11 @@ export function getThemePreloadImages(siteConfig: SiteConfig): Array<string> {
         siteConfig.theme.default.background?.homeImage,
         siteConfig.theme.default.background?.globalImage,
       ].filter((image): image is string => Boolean(image));
+    case "claude":
+      return [
+        siteConfig.theme.claude.background?.homeImage,
+        siteConfig.theme.claude.background?.globalImage,
+      ].filter((image): image is string => Boolean(image));
     default:
       __THEME_NAME__ satisfies never;
       return [];

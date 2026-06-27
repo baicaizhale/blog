@@ -282,6 +282,32 @@ export const fuwariThemeSiteConfigSchema = createFuwariThemeSiteConfigSchema();
 export const fuwariThemeSiteConfigInputSchema =
   createFuwariThemeSiteConfigInputSchema();
 
+function createClaudeThemeSiteConfigSchema() {
+  return z.object({
+    navBarName: createSiteTextSchema(60),
+    background: createDefaultThemeBackgroundSchema().optional(),
+  });
+}
+
+function createClaudeThemeSiteConfigInputSchema() {
+  return z.object({
+    navBarName: createSiteTextSchema(60).optional(),
+    background: createDefaultThemeBackgroundInputSchema().optional(),
+  });
+}
+
+function createClaudeThemeSiteConfigInputFormSchema(messages: Messages) {
+  return z.object({
+    navBarName: createSiteTextFormSchema(60, messages).optional(),
+    background:
+      createDefaultThemeBackgroundInputFormSchema(messages).optional(),
+  });
+}
+
+export const claudeThemeSiteConfigSchema = createClaudeThemeSiteConfigSchema();
+export const claudeThemeSiteConfigInputSchema =
+  createClaudeThemeSiteConfigInputSchema();
+
 export const FullSiteConfigSchema = z.object({
   title: createSiteTextSchema(120),
   author: createSiteTextSchema(80),
@@ -298,6 +324,7 @@ export const FullSiteConfigSchema = z.object({
   theme: z.object({
     default: defaultThemeSiteConfigSchema,
     fuwari: fuwariThemeSiteConfigSchema,
+    claude: claudeThemeSiteConfigSchema,
   }),
 });
 
@@ -322,6 +349,7 @@ export function createSiteConfigInputFormSchema(messages: Messages) {
         default:
           createDefaultThemeSiteConfigInputFormSchema(messages).optional(),
         fuwari: createFuwariThemeSiteConfigInputFormSchema(messages).optional(),
+        claude: createClaudeThemeSiteConfigInputFormSchema(messages).optional(),
       })
       .optional(),
   });
@@ -346,6 +374,7 @@ export const SiteConfigInputSchema = z.object({
     .object({
       default: defaultThemeSiteConfigInputSchema.optional(),
       fuwari: fuwariThemeSiteConfigInputSchema.optional(),
+      claude: claudeThemeSiteConfigInputSchema.optional(),
     })
     .optional(),
 });
@@ -365,5 +394,7 @@ export type FuwariThemeSiteConfig = z.infer<typeof fuwariThemeSiteConfigSchema>;
 export type FuwariThemeSiteConfigInput = z.infer<
   typeof fuwariThemeSiteConfigInputSchema
 >;
+export type ClaudeThemeSiteConfig = z.infer<typeof claudeThemeSiteConfigSchema>;
+export type ClaudeThemeBackground = z.infer<typeof defaultThemeBackgroundSchema>;
 export type SiteConfig = z.infer<typeof FullSiteConfigSchema>;
 export type SiteConfigInput = z.infer<typeof SiteConfigInputSchema>;

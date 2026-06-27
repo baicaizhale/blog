@@ -1,0 +1,553 @@
+/* Theme: claude — Claude.com-inspired design system */
+@import "tailwindcss";
+@import "@/styles/shared.css";
+@import "@fontsource-variable/jetbrains-mono";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    /* ── Surface Colors ── */
+    --claude-canvas: #faf9f5;
+    --claude-surface-soft: #f5f0e8;
+    --claude-surface-card: #efe9de;
+    --claude-surface-dark: #181715;
+    --claude-surface-dark-elevated: #252320;
+    --claude-surface-dark-soft: #1f1e1b;
+    --claude-hairline: #e6dfd8;
+    --claude-hairline-soft: #ebe6df;
+
+    /* ── Brand / Primary ── */
+    --claude-primary: #cc785c;
+    --claude-primary-active: #a9583e;
+    --claude-primary-disabled: #e6dfd8;
+
+    /* ── Accent ── */
+    --claude-accent-teal: #5db8a6;
+    --claude-accent-amber: #e8a55a;
+
+    /* ── Text ── */
+    --claude-ink: #141413;
+    --claude-body-strong: #252523;
+    --claude-body: #3d3d3a;
+    --claude-muted: #6c6a64;
+    --claude-muted-soft: #8e8b82;
+    --claude-on-primary: #ffffff;
+    --claude-on-dark: #faf9f5;
+    --claude-on-dark-soft: #a09d96;
+
+    /* ── Semantic ── */
+    --claude-success: #5db872;
+    --claude-warning: #d4a017;
+    --claude-error: #c64545;
+
+    /* ── Border Radius ── */
+    --claude-radius-xs: 4px;
+    --claude-radius-sm: 6px;
+    --claude-radius-md: 8px;
+    --claude-radius-lg: 12px;
+    --claude-radius-xl: 16px;
+    --claude-radius-pill: 9999px;
+
+    /* ── Spacing Tokens (reference) ── */
+    --claude-section: 96px;
+    --claude-card-padding: 32px;
+  }
+
+  .dark {
+    --claude-canvas: #181715;
+    --claude-surface-soft: #1f1e1b;
+    --claude-surface-card: #252320;
+    --claude-surface-dark: #141413;
+    --claude-surface-dark-elevated: #2a2824;
+    --claude-surface-dark-soft: #1a1916;
+    --claude-hairline: #33312c;
+    --claude-hairline-soft: #2a2824;
+
+    --claude-primary: #d4856a;
+    --claude-primary-active: #e09b82;
+    --claude-primary-disabled: #3d3d3a;
+
+    --claude-ink: #faf9f5;
+    --claude-body-strong: #efe9de;
+    --claude-body: #c4bfb6;
+    --claude-muted: #8e8b82;
+    --claude-muted-soft: #6c6a64;
+    --claude-on-primary: #ffffff;
+    --claude-on-dark: #faf9f5;
+    --claude-on-dark-soft: #a09d96;
+
+    --claude-success: #5db872;
+    --claude-warning: #d4a017;
+    --claude-error: #e05a5a;
+  }
+}
+
+@theme {
+  --font-serif: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* ── Semantic Colors ── */
+  --color-canvas: var(--claude-canvas);
+  --color-surface-soft: var(--claude-surface-soft);
+  --color-surface-card: var(--claude-surface-card);
+  --color-surface-dark: var(--claude-surface-dark);
+  --color-surface-dark-elevated: var(--claude-surface-dark-elevated);
+  --color-surface-dark-soft: var(--claude-surface-dark-soft);
+  --color-hairline: var(--claude-hairline);
+  --color-hairline-soft: var(--claude-hairline-soft);
+
+  --color-primary: var(--claude-primary);
+  --color-primary-active: var(--claude-primary-active);
+  --color-primary-disabled: var(--claude-primary-disabled);
+
+  --color-accent-teal: var(--claude-accent-teal);
+  --color-accent-amber: var(--claude-accent-amber);
+
+  --color-ink: var(--claude-ink);
+  --color-body-strong: var(--claude-body-strong);
+  --color-body: var(--claude-body);
+  --color-muted: var(--claude-muted);
+  --color-muted-soft: var(--claude-muted-soft);
+  --color-on-primary: var(--claude-on-primary);
+  --color-on-dark: var(--claude-on-dark);
+  --color-on-dark-soft: var(--claude-on-dark-soft);
+
+  --color-success: var(--claude-success);
+  --color-warning: var(--claude-warning);
+  --color-error: var(--claude-error);
+
+  /* ── Radius ── */
+  --radius-xs: var(--claude-radius-xs);
+  --radius-sm: var(--claude-radius-sm);
+  --radius-md: var(--claude-radius-md);
+  --radius-lg: var(--claude-radius-lg);
+  --radius-xl: var(--claude-radius-xl);
+  --radius-pill: var(--claude-radius-pill);
+}
+
+@layer base {
+  body {
+    background-color: var(--claude-canvas);
+    color: var(--claude-body);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--claude-primary) 25%, transparent);
+    color: inherit;
+  }
+
+  /* ── Typography ── */
+  .claude-theme h1,
+  .claude-theme h2,
+  .claude-theme h3 {
+    font-family: "Cormorant Garamond", "EB Garamond", Garamand, "Times New Roman", serif;
+    font-weight: 400;
+    color: var(--claude-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .claude-theme h1 {
+    font-size: 2.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .claude-theme h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .claude-theme h3 {
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .claude-theme h4 {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: var(--claude-ink);
+  }
+
+  .claude-theme p {
+    line-height: 1.7;
+    color: var(--claude-body);
+  }
+
+  .claude-theme a {
+    color: var(--claude-primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .claude-theme a:hover {
+    color: var(--claude-primary-active);
+  }
+
+  .claude-theme blockquote {
+    border-left: 2px solid var(--claude-hairline);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: var(--claude-muted);
+    margin: 1.5rem 0;
+  }
+
+  .claude-theme ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .claude-theme ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .claude-theme li {
+    margin-top: 0.375rem;
+    line-height: 1.7;
+  }
+
+  .claude-theme code {
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.875em;
+    background-color: var(--claude-surface-soft);
+    padding: 0.15em 0.4em;
+    border-radius: var(--claude-radius-xs);
+  }
+
+  .claude-theme pre {
+    background-color: var(--claude-surface-dark);
+    border-radius: var(--claude-radius-lg);
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: 1px solid var(--claude-hairline);
+  }
+
+  .claude-theme pre code {
+    background: none;
+    padding: 0;
+    color: var(--claude-on-dark);
+  }
+
+  small {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--claude-hairline);
+    border-radius: var(--claude-radius-pill);
+    border: 1px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--claude-muted);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: var(--claude-surface-dark-elevated);
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--claude-muted-soft);
+  }
+}
+
+@layer components {
+  /* ── Claude Button ── */
+  .claude-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--claude-primary);
+    color: var(--claude-on-primary);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.75rem 1.25rem;
+    height: 40px;
+    border-radius: var(--claude-radius-md);
+    transition: background-color 0.15s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .claude-btn-primary:hover {
+    background-color: var(--claude-primary-active);
+  }
+
+  .claude-btn-primary:disabled {
+    background-color: var(--claude-primary-disabled);
+    cursor: not-allowed;
+  }
+
+  .claude-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--claude-canvas);
+    color: var(--claude-ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.75rem 1.25rem;
+    height: 40px;
+    border-radius: var(--claude-radius-md);
+    border: 1px solid var(--claude-hairline);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .claude-btn-secondary:hover {
+    background-color: var(--claude-surface-soft);
+  }
+
+  .claude-btn-secondary-on-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--claude-surface-dark-elevated);
+    color: var(--claude-on-dark);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.75rem 1.25rem;
+    height: 40px;
+    border-radius: var(--claude-radius-md);
+    border: 1px solid var(--claude-hairline);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .claude-btn-secondary-on-dark:hover {
+    background-color: var(--claude-surface-dark-soft);
+  }
+
+  /* ── Card ── */
+  .claude-card {
+    background-color: var(--claude-surface-card);
+    border-radius: var(--claude-radius-lg);
+    padding: var(--claude-card-padding);
+    transition: background-color 0.3s ease;
+  }
+
+  .claude-card-dark {
+    background-color: var(--claude-surface-dark);
+    border-radius: var(--claude-radius-lg);
+    padding: var(--claude-card-padding);
+    color: var(--claude-on-dark);
+    transition: background-color 0.3s ease;
+  }
+
+  .claude-card-border {
+    background-color: var(--claude-canvas);
+    border: 1px solid var(--claude-hairline);
+    border-radius: var(--claude-radius-lg);
+    padding: var(--claude-card-padding);
+  }
+
+  /* ── Badge ── */
+  .claude-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--claude-radius-pill);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    background-color: var(--claude-surface-card);
+    color: var(--claude-ink);
+  }
+
+  .claude-badge-coral {
+    background-color: var(--claude-primary);
+    color: var(--claude-on-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── Text Input ── */
+  .claude-input {
+    background-color: var(--claude-canvas);
+    color: var(--claude-ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    padding: 0.625rem 0.875rem;
+    height: 40px;
+    border-radius: var(--claude-radius-md);
+    border: 1px solid var(--claude-hairline);
+    width: 100%;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+  }
+
+  .claude-input:focus {
+    border-color: var(--claude-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--claude-primary) 15%, transparent);
+  }
+
+  /* ── Section Spacing ── */
+  .claude-section {
+    padding-top: var(--claude-section);
+    padding-bottom: var(--claude-section);
+  }
+
+  /* ── Hairline Divider ── */
+  .claude-hairline {
+    height: 1px;
+    background-color: var(--claude-hairline);
+    border: none;
+  }
+}
+
+/* ── KaTeX / Mathematics ── */
+.tiptap-mathematics-render,
+.katex {
+  font-size: 1.1em;
+  color: inherit;
+}
+.tiptap-mathematics-render[data-type="block-math"],
+.katex-display {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+/* ── Comment Highlight for Anchor Navigation ── */
+@keyframes claude-highlight-flash {
+  0% { background-color: var(--claude-ink); color: var(--claude-on-dark); }
+  15% { background-color: var(--claude-ink); color: var(--claude-on-dark); }
+  100% { background-color: transparent; color: inherit; }
+}
+
+.highlight-active {
+  position: relative;
+  scroll-margin-top: 6rem;
+  animation: claude-highlight-flash 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* ── TipTap Placeholder ── */
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--claude-muted);
+  font-family: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+  font-style: italic;
+  float: left;
+  height: 0;
+  pointer-events: none;
+  content: attr(data-placeholder);
+}
+
+/* ── TipTap List Fix ── */
+.ProseMirror li > p {
+  margin: 0;
+}
+.ProseMirror li > p:first-child:last-child {
+  display: inline;
+}
+
+/* ── Table Styles ── */
+.ProseMirror table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  table-layout: fixed;
+  width: 100%;
+}
+.ProseMirror td,
+.ProseMirror th {
+  border: 1px solid var(--claude-hairline);
+  box-sizing: border-box;
+  min-width: 1em;
+  padding: 0.5rem 0.75rem;
+  position: relative;
+  vertical-align: top;
+}
+.ProseMirror th {
+  background-color: var(--claude-surface-soft);
+  font-weight: 500;
+  text-align: left;
+  color: var(--claude-muted);
+}
+.ProseMirror .selectedCell:after {
+  background-color: var(--claude-ink);
+  content: "";
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+.ProseMirror .column-resize-handle {
+  background-color: var(--claude-primary);
+  bottom: -2px;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+  z-index: 20;
+  pointer-events: none;
+}
+.ProseMirror table p {
+  margin: 0;
+}
+
+/* ── Mathematics in Editor ── */
+.ProseMirror .tiptap-mathematics-render,
+.ProseMirror .katex {
+  font-size: 1.1em;
+  color: inherit;
+}
+.ProseMirror .tiptap-mathematics-render[data-type="block-math"],
+.ProseMirror .katex-display {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+/* ── Shiki Dark Mode ── */
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}

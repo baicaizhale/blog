@@ -27,5 +27,8 @@ export const blogConfig = {
       avatar: "/images/avatar.png",
       primaryHue: 250,
     },
+    claude: {
+      navBarName: "Claude Blog",
+    },
   },
 } as const satisfies SiteConfig;
