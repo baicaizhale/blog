@@ -132,6 +132,31 @@ export function resolveSiteConfig(
           config?.site?.theme?.fuwari?.primaryHue ??
           blogConfig.theme.fuwari.primaryHue,
       },
+      claude: {
+        navBarName:
+          config?.site?.theme?.claude?.navBarName ??
+          blogConfig.theme.claude.navBarName,
+        background: config?.site?.theme?.claude?.background
+          ? {
+              homeImage:
+                config.site.theme.claude.background.homeImage ?? "",
+              globalImage:
+                config.site.theme.claude.background.globalImage ?? "",
+              light: {
+                opacity:
+                  config.site.theme.claude.background.light?.opacity ?? 0.15,
+              },
+              dark: {
+                opacity:
+                  config.site.theme.claude.background.dark?.opacity ?? 0.1,
+              },
+              backdropBlur:
+                config.site.theme.claude.background.backdropBlur ?? 8,
+              transitionDuration:
+                config.site.theme.claude.background.transitionDuration ?? 600,
+            }
+          : undefined,
+      },
     },
   });
 }
