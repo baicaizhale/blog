@@ -505,6 +505,14 @@
   .claude-card-code-window pre {
     background-color: var(--claude-surface-dark-soft);
   }
+  /* Force Shiki light-on-dark colors inside code-window-card, regardless of page mode */
+  .claude-card-code-window .shiki,
+  .claude-card-code-window .shiki span {
+    color: var(--shiki-dark, var(--claude-on-dark)) !important;
+    background-color: var(--shiki-dark-bg, var(--claude-surface-dark-soft)) !important;
+    font-weight: var(--shiki-dark-font-weight, 400) !important;
+    text-decoration: var(--shiki-dark-text-decoration, none) !important;
+  }
 
   /* card with hairline border on cream canvas */
   .claude-card-border {
