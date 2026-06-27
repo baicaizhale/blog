@@ -76,7 +76,7 @@ export function LoginForm({ form, isEmailConfigured }: LoginFormProps) {
       <button
         type="submit"
         disabled={isSubmitting || loginStep !== "IDLE" || turnstilePending}
-        className="w-full py-4 bg-[var(--claude-ink)] text-[var(--claude-on-dark)] text-[10px] font-mono uppercase tracking-[0.3em] hover:opacity-80 transition-all disabled:opacity-30 flex items-center justify-center gap-3"
+        className="w-full claude-btn-primary"
       >
         {loginStep === "VERIFYING" ? (
           <Loader2 className="animate-spin" size={14} />

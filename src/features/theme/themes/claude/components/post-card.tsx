@@ -16,51 +16,50 @@ interface PostCardProps {
 export const PostCard = memo(
   ({ post, pinned, views, isLoadingViews }: PostCardProps) => {
     return (
-      <div className="group">
+      <div className="group py-8 first:pt-4">
         <Link
           to="/post/$slug"
           params={{ slug: post.slug }}
-          className="block py-8 md:py-10 transition-all duration-300"
+          className="block"
         >
           <article className="flex flex-col gap-3">
             {/* Metadata Row */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--claude-muted)]">
-              <time
-                dateTime={post.publishedAt?.toISOString()}
-                className="whitespace-nowrap text-sm"
-              >
+              <time dateTime={post.publishedAt?.toISOString()}>
                 <ClientOnly fallback="-">
                   {formatDate(post.publishedAt)}
                 </ClientOnly>
               </time>
+
               {post.tags && post.tags.length > 0 && (
                 <>
-                  <span className="opacity-30">/</span>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag.id}
-                        className="claude-badge text-xs"
-                      >
-                        {tag.name}
-                      </span>
-                    ))}
-                  </div>
+                  <span className="text-[var(--claude-hairline)]">&middot;</span>
+                  {post.tags.map((tag) => (
+                    <span key={tag.id} className="claude-badge">
+                      {tag.name}
+                    </span>
+                  ))}
                 </>
+              )}
+
+              {pinned && (
+                <span className="claude-badge-coral flex items-center gap-1">
+                  <Pin size={10} /> Pinned
+                </span>
               )}
 
               {isLoadingViews ? (
                 <>
-                  <span className="opacity-30">/</span>
-                  <span className="flex items-center gap-1.5 whitespace-nowrap text-[var(--claude-muted)]">
+                  <span className="text-[var(--claude-hairline)]">&middot;</span>
+                  <span className="flex items-center gap-1">
                     <Eye size={12} />
                     <Skeleton className="h-3 w-12 rounded" />
                   </span>
                 </>
               ) : views !== undefined ? (
                 <>
-                  <span className="opacity-30">/</span>
-                  <span className="flex items-center gap-1.5 whitespace-nowrap text-[var(--claude-muted)]">
+                  <span className="text-[var(--claude-hairline)]">&middot;</span>
+                  <span className="flex items-center gap-1">
                     <Eye size={12} />
                     {m.post_views_count({ count: views })}
                   </span>
@@ -68,32 +67,22 @@ export const PostCard = memo(
               ) : null}
             </div>
 
-            {/* Title — serif, editorial */}
+            {/* Title — Serif display, coral hover */}
             <h3
-              className="text-2xl md:text-3xl font-serif text-[var(--claude-ink)] group-hover:text-[var(--claude-primary)] transition-colors duration-300 flex items-center gap-3"
+              className="text-xl md:text-2xl font-serif text-[var(--claude-ink)] group-hover:text-[var(--claude-primary)] transition-colors duration-200"
               style={{
                 fontWeight: 400,
                 letterSpacing: "-0.02em",
                 viewTransitionName: `post-title-${post.slug}`,
               }}
             >
-              {pinned && (
-                <Pin
-                  size={22}
-                  className="text-[var(--claude-muted-soft)]"
-                  strokeWidth={1.5}
-                />
-              )}
-              <span className="line-clamp-2">{post.title}</span>
+              {post.title}
             </h3>
 
-            {/* Summary */}
-            <p className="text-[var(--claude-body)] leading-relaxed max-w-2xl line-clamp-2 text-base">
+            {/* Summary — Body text */}
+            <p className="text-[var(--claude-body)] leading-relaxed line-clamp-2 text-sm md:text-base">
               {post.summary}
             </p>
-
-            {/* Hairline separator */}
-            <div className="mt-4 h-px bg-[var(--claude-hairline)]" />
           </article>
         </Link>
       </div>
