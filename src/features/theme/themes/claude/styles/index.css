@@ -53,12 +53,6 @@
     --geist-radius-pill: 100px;
     --geist-radius-pill-cat: 64px;
     --geist-radius-full: 9999px;
-
-    /* Code block (GitHub-style) */
-    --geist-code-header: #f0f2f4;
-    --geist-code-header-text: #656d76;
-    --geist-code-bg: #f6f8fa;
-    --geist-code-border: #d0d7de;
   }
 
   .dark {
@@ -76,10 +70,6 @@
     --geist-error: #f73a3a;
     --geist-violet: #a855f7;
     --geist-cyan: #2dd4bf;
-    --geist-code-header: #21262d;
-    --geist-code-header-text: #8b949e;
-    --geist-code-bg: #161b22;
-    --geist-code-border: #30363d;
   }
 }
 
@@ -279,34 +269,11 @@
     padding: 2rem;
   }
   .geist-code-block {
-    border: 1px solid var(--geist-code-border);
-    border-radius: var(--geist-radius-sm);
-    overflow: hidden;
-  }
-  .geist-code-block .geist-code-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0.5rem 1rem;
-    background: var(--geist-code-header);
-    color: var(--geist-code-header-text);
-    font-size: 0.75rem; line-height: 1;
-    border-bottom: 1px solid var(--geist-code-border);
-  }
-  .geist-code-block .geist-code-header button {
-    display: inline-flex; align-items: center; gap: 0.25rem;
-    background: none; border: none;
-    color: var(--geist-code-header-text);
-    cursor: pointer; font-size: 0.75rem;
-    padding: 0.125rem; border-radius: 3px;
-    transition: color 0.15s;
-  }
-  .geist-code-block .geist-code-header button:hover {
-    color: var(--geist-link);
-  }
-  .geist-code-block .geist-code-body {
-    background: var(--geist-code-bg);
+    background: var(--geist-canvas-elevated);
+    border: 1px solid var(--geist-hairline);
+    border-radius: var(--geist-radius-md);
     padding: 1rem;
-    overflow-x: auto;
-    font-size: 0.8125rem; line-height: 1.5;
+    overflow: hidden;
   }
   .geist-hairline { height: 1px; background: var(--geist-hairline); border: none; }
 }
