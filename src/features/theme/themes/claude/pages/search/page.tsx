@@ -13,7 +13,7 @@ export function SearchPage({ query, results, isSearching, onQueryChange, onSelec
       <section className="mb-16">
         <div className="border-b border-[var(--geist-hairline)] pb-3 focus-within:border-[var(--geist-ink)] transition-colors">
           <label className="geist-eyebrow block mb-1">{m.search_input_label()}</label>
-          <input ref={inputRef} type="text" value={query} onChange={e => onQueryChange(e.target.value)} placeholder="..." className="w-full bg-transparent text-3xl md:text-4xl font-semibold text-[var(--geist-ink)] placeholder:text-[var(--geist-hairline)] focus:outline-none" style={{ letterSpacing: "-0.08em" }} />
+          <input ref={inputRef} type="text" value={query} onChange={e => onQueryChange(e.target.value)} placeholder="..." className="w-full bg-transparent text-3xl md:text-4xl font-semibold text-[var(--geist-ink)] placeholder:text-[var(--geist-hairline)] focus:outline-none" style={{ letterSpacing: "-0.02em" }} />
         </div>
       </section>
       <section className="space-y-4">

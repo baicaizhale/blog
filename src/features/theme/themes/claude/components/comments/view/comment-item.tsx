@@ -1,6 +1,16 @@
 import { ClientOnly } from "@tanstack/react-router"; import { memo, useMemo } from "react"; import { authClient } from "@/lib/auth/auth.client"; import { cn, formatDate } from "@/lib/utils"; import { m } from "@/paraglide/messages"; import { ExpandableContent } from "./expandable-content";
 
-export const CommentItem = memo(({ comment, onReply, onDelete, isReply, replyToName, highlightCommentId, className }: any) => {
+interface CommentItemProps {
+  comment: {
+    id: number; status?: string; userId?: string; user?: { id?: string; image?: string; name?: string; role?: string } | null;
+    content: unknown; createdAt: Date; rootId?: number; replyTo?: string | null;
+  };
+  onReply?: (rootId: number, commentId: number, userName: string) => void;
+  onDelete?: (id: number) => void;
+  isReply?: boolean; replyToName?: string; highlightCommentId?: number; className?: string;
+}
+
+export const CommentItem = memo(({ comment, onReply, onDelete, isReply, replyToName, highlightCommentId, className }: CommentItemProps) => {
   const isHighlighted = highlightCommentId === comment.id;
   const { data: session } = authClient.useSession();
   const isAuthor = session?.user.id === comment.userId;

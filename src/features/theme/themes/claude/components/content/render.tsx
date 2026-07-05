@@ -10,12 +10,12 @@ export function renderReact(content: JSONContent) {
     extensions, content,
     options: {
       nodeMapping: {
-        image: ({ node }) => { const a = node.attrs as any; return <ImageDisplay src={a.src} alt={(a.alt && a.alt !== "null" ? a.alt : null) || "blog image"} width={typeof a.width === "string" ? parseInt(a.width) : a.width} height={typeof a.height === "string" ? parseInt(a.height) : a.height} />; },
-        codeBlock: ({ node }) => { const a = node.attrs as any; return <CodeBlock code={node.textContent || ""} language={a.language || null} highlightedHtml={a.highlightedHtml} />; },
-        tableCell: ({ node, children }) => { const a = node.attrs as any; return <td colSpan={a.colspan} rowSpan={a.rowspan} style={a.style ? { width: a.style } : undefined}>{children}</td>; },
-        tableHeader: ({ node, children }) => { const a = node.attrs as any; return <th colSpan={a.colspan} rowSpan={a.rowspan} style={a.style ? { width: a.style } : undefined}>{children}</th>; },
-        inlineMath: ({ node }) => { const latex = (node.attrs as any).latex ?? ""; return <MathFormula latex={latex} mode="inline" />; },
-        blockMath: ({ node }) => { const latex = (node.attrs as any).latex ?? ""; return <MathFormula latex={latex} mode="block" />; },
+        image: ({ node }) => { const a = node.attrs as Record<string, unknown>; return <ImageDisplay src={a.src as string} alt={(a.alt as string && (a.alt as string) !== "null" ? a.alt as string : null) || "blog image"} width={typeof a.width === "string" ? parseInt(a.width) : a.width as number} height={typeof a.height === "string" ? parseInt(a.height) : a.height as number} />; },
+        codeBlock: ({ node }) => { const a = node.attrs as Record<string, unknown>; return <CodeBlock code={node.textContent || ""} language={(a.language as string) || null} highlightedHtml={a.highlightedHtml as string} />; },
+        tableCell: ({ node, children }) => { const a = node.attrs as Record<string, unknown>; return <td colSpan={a.colspan as number} rowSpan={a.rowspan as number} style={a.style ? { width: a.style as string } : undefined}>{children}</td>; },
+        tableHeader: ({ node, children }) => { const a = node.attrs as Record<string, unknown>; return <th colSpan={a.colspan as number} rowSpan={a.rowspan as number} style={a.style ? { width: a.style as string } : undefined}>{children}</th>; },
+        inlineMath: ({ node }) => { const latex = (node.attrs as Record<string, unknown>).latex as string ?? ""; return <MathFormula latex={latex} mode="inline" />; },
+        blockMath: ({ node }) => { const latex = (node.attrs as Record<string, unknown>).latex as string ?? ""; return <MathFormula latex={latex} mode="block" />; },
       },
     },
   });

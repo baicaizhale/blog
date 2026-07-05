@@ -6,7 +6,32 @@ import { CommentItem } from "./comment-item";
 import { CommentReplyForm } from "./comment-reply-form";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const CommentList = ({ rootComments, postId, onReply, onDelete, replyTarget, onCancelReply, onSubmitReply, isSubmittingReply, initialExpandedRootId, highlightCommentId }: any) => {
+interface CommentListProps {
+  rootComments: Array<RootCommentWithReplyCount>;
+  postId: number;
+  onReply?: (rootId: number, commentId: number, userName: string) => void;
+  onDelete?: (id: number) => void;
+  replyTarget?: { rootId: number; commentId: number; userName: string } | null;
+  onCancelReply?: () => void;
+  onSubmitReply?: (content: string) => void;
+  isSubmittingReply?: boolean;
+  initialExpandedRootId?: number;
+  highlightCommentId?: number;
+}
+
+interface RepliesListProps {
+  rootId: number;
+  postId: number;
+  onReply?: (rootId: number, commentId: number, userName: string) => void;
+  onDelete?: (id: number) => void;
+  replyTarget?: { rootId: number; commentId: number; userName: string } | null;
+  onCancelReply?: () => void;
+  onSubmitReply?: (content: string) => void;
+  isSubmittingReply?: boolean;
+  highlightCommentId?: number;
+}
+
+export const CommentList = ({ rootComments, postId, onReply, onDelete, replyTarget, onCancelReply, onSubmitReply, isSubmittingReply, initialExpandedRootId, highlightCommentId }: CommentListProps) => {
   const [expanded, setExpanded] = useState<Set<number>>(() => initialExpandedRootId ? new Set([initialExpandedRootId]) : new Set());
   const toggle = (id: number) => setExpanded(p => { const n = new Set(p); if (n.has(id)) n.delete(id); else n.add(id); return n; });
 
@@ -20,12 +45,12 @@ export const CommentList = ({ rootComments, postId, onReply, onDelete, replyTarg
   </div>)}</div>);
 };
 
-function RepliesList({ rootId, postId, onReply, onDelete, replyTarget, onCancelReply, onSubmitReply, isSubmittingReply, highlightCommentId }: any) {
+function RepliesList({ rootId, postId, onReply, onDelete, replyTarget, onCancelReply, onSubmitReply, isSubmittingReply, highlightCommentId }: RepliesListProps) {
   const { data, isLoading } = useInfiniteQuery(repliesByRootIdInfiniteQuery(rootId, postId));
   const replies = data?.pages.flatMap(p => p.items) ?? [];
   if (isLoading) return <div className="ml-12 md:ml-16 py-4 text-sm text-[var(--geist-mute)]">Loading...</div>;
   return (<div className="ml-4 md:ml-8 border-l-2 border-[var(--geist-hairline)] pl-4 md:pl-8">
-    {replies.map((reply: any) => <div key={reply.id}>
+    {replies.map((reply) => <div key={reply.id}>
       {replyTarget?.commentId === reply.id && onSubmitReply && <div className="mb-2"><CommentReplyForm parentUserName={replyTarget.userName} onSubmit={onSubmitReply} isSubmitting={isSubmittingReply || false} onCancel={onCancelReply || (() => {})} /></div>}
       <CommentItem comment={reply} onReply={onReply} onDelete={onDelete} isReply replyToName={reply.replyTo ? undefined : reply.user?.name} highlightCommentId={highlightCommentId} />
     </div>)}

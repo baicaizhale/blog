@@ -1,6 +1,6 @@
-import type { Editor } from "@tiptap/react"; import { Bold, Code, Image as ImageIcon, Italic, Link as LinkIcon, Redo, Strikethrough, Underline as UnderlineIcon, Undo } from "lucide-react";
+import type { Editor } from "@tiptap/react"; import type { LucideIcon } from "lucide-react"; import { Bold, Code, Image as ImageIcon, Italic, Link as LinkIcon, Redo, Strikethrough, Underline as UnderlineIcon, Undo } from "lucide-react";
 
-const TBtn = ({ onClick, isActive, icon: Icon }: any) => (
+const TBtn = ({ onClick, isActive, icon: Icon }: { onClick?: () => void; isActive?: boolean; icon: LucideIcon }) => (
   <button onClick={onClick} className={`p-1.5 rounded-[var(--geist-radius-sm)] transition-colors ${isActive ? "bg-[var(--geist-ink)] text-[var(--geist-canvas-elevated)]" : "text-[var(--geist-mute)] hover:bg-[var(--geist-hairline-soft)] hover:text-[var(--geist-ink)]"}`} type="button"><Icon size={14}/></button>
 );
 

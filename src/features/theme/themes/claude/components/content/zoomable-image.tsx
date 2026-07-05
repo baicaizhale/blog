@@ -1,6 +1,6 @@
-import { ClientOnly } from "@tanstack/react-router"; import { useEffect, useRef, useState } from "react"; import { createPortal } from "react-dom"; import { cn } from "@/lib/utils"; import { m } from "@/paraglide/messages";
+import { ClientOnly } from "@tanstack/react-router"; import type { ImgHTMLAttributes } from "react"; import { useEffect, useRef, useState } from "react"; import { createPortal } from "react-dom"; import { cn } from "@/lib/utils"; import { m } from "@/paraglide/messages";
 
-export default function ZoomableImage({ className="", alt="", src, showHint, width, height, ...props }: any) {
+export default function ZoomableImage({ className = "", alt = "", src, showHint, width, height, ...props }: ImgHTMLAttributes<HTMLImageElement> & { showHint?: boolean }) {
   const [open, setOpen] = useState(false); const [loaded, setLoaded] = useState(false); const ref = useRef<HTMLImageElement>(null);
   useEffect(() => { if (ref.current?.complete) setLoaded(true); }, []);
   if (!src) return null;

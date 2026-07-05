@@ -17,7 +17,7 @@ export function MobileMenu({ navOptions, isOpen, onClose, user, logout }: Mobile
           {navOptions.map((item) => (
             <Link key={item.id} to={item.to} onClick={onClose}
               className="text-2xl font-semibold text-[var(--geist-mute)] hover:text-[var(--geist-ink)] transition-colors tracking-tight"
-              style={{ letterSpacing: "-0.04em" }}>
+              style={{ letterSpacing: "-0.02em" }}>
               {item.label}
             </Link>
           ))}

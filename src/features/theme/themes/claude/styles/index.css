@@ -3,6 +3,7 @@
 @import "tailwindcss";
 @import "@/styles/shared.css";
 @import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/noto-sans-sc";
 @plugin "@tailwindcss/typography";
 
 @layer base {
@@ -73,7 +74,7 @@
 }
 
 @theme {
-  --font-sans: "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-sans: "Noto Sans SC Variable", system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
   --color-geist-canvas: var(--geist-canvas);
   --color-geist-elevated: var(--geist-canvas-elevated);
@@ -89,7 +90,7 @@
   body {
     background-color: var(--geist-canvas);
     color: var(--geist-body);
-    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
@@ -104,28 +105,28 @@
 /* ═══ TYPOGRAPHY ═══ */
 @layer base {
   .geist-theme h1 {
-    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif;
     font-weight: 600;
     font-size: 2rem; line-height: 1.2;
-    letter-spacing: -0.08em;
+    letter-spacing: -0.03em;
     color: var(--geist-ink);
   }
   .geist-theme h2 {
-    font-family: "JetBrains Mono Variable", sans-serif;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif;
     font-weight: 600;
     font-size: 1.5rem; line-height: 1.3;
-    letter-spacing: -0.04em;
-    color: var(--geist-ink);
-  }
-  .geist-theme h3 {
-    font-family: "JetBrains Mono Variable", sans-serif;
-    font-weight: 600;
-    font-size: 1.125rem; line-height: 1.4;
     letter-spacing: -0.02em;
     color: var(--geist-ink);
   }
+  .geist-theme h3 {
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem; line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--geist-ink);
+  }
   .geist-theme h4 {
-    font-family: "JetBrains Mono Variable", sans-serif;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif;
     font-weight: 500;
     font-size: 1rem; line-height: 1.4;
     color: var(--geist-ink);
@@ -169,10 +170,10 @@
   }
 
   @media (min-width: 768px) {
-    .geist-theme h1 { font-size: 2.5rem; letter-spacing: -0.1em; }
+    .geist-theme h1 { font-size: 2.5rem; letter-spacing: -0.03em; }
   }
   @media (min-width: 1024px) {
-    .geist-theme h1 { font-size: 3rem; letter-spacing: -0.12em; }
+    .geist-theme h1 { font-size: 3rem; letter-spacing: -0.04em; }
   }
 }
 
@@ -182,7 +183,7 @@
   .geist-btn-primary {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     background: var(--geist-ink); color: var(--geist-canvas-elevated);
-    font-family: "JetBrains Mono Variable", sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
     padding: 0 14px; height: 2.75rem;
     border-radius: var(--geist-radius-pill); border: none;
     cursor: pointer; white-space: nowrap;
@@ -195,7 +196,7 @@
   .geist-btn-secondary {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     background: var(--geist-canvas-elevated); color: var(--geist-ink);
-    font-family: "JetBrains Mono Variable", sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
     padding: 0 14px; height: 2.75rem;
     border-radius: var(--geist-radius-pill); border: 1px solid var(--geist-hairline);
     cursor: pointer; white-space: nowrap;
@@ -208,7 +209,7 @@
   .geist-btn-primary-sm {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     background: var(--geist-ink); color: var(--geist-canvas-elevated);
-    font-family: "JetBrains Mono Variable", sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
     padding: 0 6px; height: 2rem;
     border-radius: var(--geist-radius-sm); border: none;
     cursor: pointer; white-space: nowrap;
@@ -220,7 +221,7 @@
   .geist-btn-ghost-sm {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     background: var(--geist-canvas-elevated); color: var(--geist-ink);
-    font-family: "JetBrains Mono Variable", sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
     padding: 0 6px; height: 2rem;
     border-radius: var(--geist-radius-sm); border: 1px solid var(--geist-hairline);
     cursor: pointer; white-space: nowrap;
@@ -240,7 +241,7 @@
 @layer components {
   .geist-input {
     background: var(--geist-canvas-elevated); color: var(--geist-ink);
-    font-family: "JetBrains Mono Variable", sans-serif; font-size: 0.875rem;
+    font-family: "Noto Sans SC Variable", system-ui, sans-serif; font-size: 0.875rem;
     padding: 0.5rem 0.75rem; height: 2.5rem;
     border-radius: var(--geist-radius-sm);
     border: 1px solid var(--geist-hairline);
