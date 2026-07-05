@@ -8,9 +8,12 @@ export const CodeBlock = memo(({ code, language, highlightedHtml }: { code: stri
   const fallback = `<pre class="shiki font-mono text-sm leading-relaxed text-[var(--geist-ink)] bg-transparent! p-0 m-0"><code>${code}</code></pre>`;
   const [copied, setCopied] = useState(false);
   return (
-    <div className="geist-code-block my-8"><div className="flex items-center justify-between mb-2"><span className="geist-eyebrow">{label}</span>
-      <button onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false),2000); }} className="text-xs text-[var(--geist-mute)] hover:text-[var(--geist-ink)]" type="button">{copied ? <Check size={14}/> : <Copy size={14}/>}</button></div>
-      <div className="overflow-x-auto"><div dangerouslySetInnerHTML={{ __html: highlightedHtml||fallback }} /></div>
+    <div className="geist-code-block my-8">
+      <div className="geist-code-header">
+        <span>{label}</span>
+        <button onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false),2000); }} type="button">{copied ? <><Check size={12}/><span>Copied</span></> : <><Copy size={12}/><span>Copy</span></>}</button>
+      </div>
+      <div className="geist-code-body"><div dangerouslySetInnerHTML={{ __html: highlightedHtml||fallback }} /></div>
     </div>
   );
 });
