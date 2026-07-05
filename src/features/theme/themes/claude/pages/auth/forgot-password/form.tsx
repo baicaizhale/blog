@@ -1,64 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import type { ForgotPasswordFormData } from "@/features/theme/contract/pages";
 import { m } from "@/paraglide/messages";
 
-interface ForgotPasswordFormProps {
-  form: ForgotPasswordFormData;
-}
+interface ForgotPasswordFormProps { form: ForgotPasswordFormData; }
 
 export function ForgotPasswordForm({ form }: ForgotPasswordFormProps) {
   const { register, errors, handleSubmit, isSubmitting, turnstilePending } = form;
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <p className="text-sm text-[var(--claude-muted)] font-light leading-relaxed">
-        {m.forgot_password_header_desc()}
-      </p>
-
-      <div className="space-y-6">
-        <div className="space-y-2 group">
-          <label
-            htmlFor="email"
-            className="text-[10px] font-mono uppercase tracking-widest text-[var(--claude-muted)] group-focus-within:text-[var(--claude-ink)] transition-colors"
-          >
-            {m.forgot_password_email_label()}
-          </label>
-          <Input
-            id="email"
-            type="email"
-            {...register("email")}
-            className="w-full bg-transparent border-0 border-b border-[var(--claude-hairline)] rounded-none py-3 text-sm font-light focus-visible:ring-0 focus:border-[var(--claude-ink)] focus:outline-none transition-all placeholder:text-[var(--claude-muted-soft)] shadow-none px-0"
-            placeholder={m.login_email_placeholder()}
-          />
-          {errors.email && (
-            <span className="text-[9px] font-mono text-[var(--claude-error)] uppercase tracking-widest mt-1 block">
-              {errors.email.message}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <button
-          type="submit"
-          disabled={isSubmitting || turnstilePending}
-          className="w-full claude-btn-primary"
-        >
-          {isSubmitting ? (
-            <Loader2 className="animate-spin" size={14} />
-          ) : (
-            <span>{m.forgot_password_submit()}</span>
-          )}
-        </button>
-
-        <Link
-          to="/login"
-          className="block w-full text-center text-[9px] font-mono text-[var(--claude-muted)] hover:text-[var(--claude-ink)] transition-colors"
-        >
-          [ &larr; {m.register_back_to_login()} ]
-        </Link>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <p className="text-sm text-[var(--geist-body)]">{m.forgot_password_header_desc()}</p>
+      <div><label htmlFor="email" className="geist-eyebrow">{m.forgot_password_email_label()}</label><Input id="email" type="email" {...register("email")} className="geist-input" placeholder={m.login_email_placeholder()} />{errors.email && <span className="text-xs text-[var(--geist-error)]">{errors.email.message}</span>}</div>
+      <div className="space-y-3">
+        <button type="submit" disabled={isSubmitting || turnstilePending} className="w-full geist-btn-primary">{isSubmitting ? "Sending..." : m.forgot_password_submit()}</button>
+        <Link to="/login" className="block text-center text-xs text-[var(--geist-mute)] hover:text-[var(--geist-ink)]">[ &larr; {m.register_back_to_login()} ]</Link>
       </div>
     </form>
   );

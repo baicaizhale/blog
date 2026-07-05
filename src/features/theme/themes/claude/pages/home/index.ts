@@ -1,2 +1,1 @@
-export { HomePage } from "./page";
-export { HomePageSkeleton } from "./skeleton";
+export { HomePage } from "./page"; export { HomePageSkeleton } from "./skeleton";

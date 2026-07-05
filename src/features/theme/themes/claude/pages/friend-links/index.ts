@@ -1,2 +1,1 @@
-export { FriendLinksPage } from "./page";
-export { FriendLinksPageSkeleton } from "./skeleton";
+export { FriendLinksPage } from "./page"; export { FriendLinksPageSkeleton } from "./skeleton";

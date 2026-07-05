@@ -1,635 +1,307 @@
-/* Claude Theme — Full Design System */
-/* Based on claude.com marketing design language */
-
+/* Theme: claude — Vercel Geist-inspired design system */
+/* Near-white canvas, near-black ink, hairline borders, typography-driven */
 @import "tailwindcss";
 @import "@/styles/shared.css";
 @import "@fontsource-variable/jetbrains-mono";
 @plugin "@tailwindcss/typography";
 
-/* ── Google Fonts (open-source substitutes for licensed typefaces) ── */
-/* Copernicus → Cormorant Garamond + EB Garamond (serif display) */
-/* StyreneB  → Inter (humanist sans body) */
-
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   :root {
-    /* ═══════════════════════════════════════════
-       CLAUDE DESIGN TOKENS
-       ═══════════════════════════════════════════ */
+    /* Surface */
+    --geist-canvas: #fafafa;
+    --geist-canvas-elevated: #ffffff;
+    --geist-hairline-soft: #f2f2f2;
 
-    /* ── Brand & Accent ── */
-    --claude-primary: #cc785c;
-    --claude-primary-active: #a9583e;
-    --claude-primary-disabled: #e6dfd8;
-    --claude-accent-teal: #5db8a6;
-    --claude-accent-amber: #e8a55a;
+    /* Text */
+    --geist-ink: #171717;
+    --geist-body: #4d4d4d;
+    --geist-mute: #8f8f8f;
+    --geist-faint: #a1a1a1;
 
-    /* ── Surface ── */
-    --claude-canvas: #faf9f5;
-    --claude-surface-soft: #f5f0e8;
-    --claude-surface-card: #efe9de;
-    --claude-surface-cream-strong: #e8e0d2;
-    --claude-surface-dark: #181715;
-    --claude-surface-dark-elevated: #252320;
-    --claude-surface-dark-soft: #1f1e1b;
-    --claude-hairline: #e6dfd8;
-    --claude-hairline-soft: #ebe6df;
+    /* Borders */
+    --geist-hairline: #ebebeb;
 
-    /* ── Text ── */
-    --claude-ink: #141413;
-    --claude-body-strong: #252523;
-    --claude-body: #3d3d3a;
-    --claude-muted: #6c6a64;
-    --claude-muted-soft: #8e8b82;
-    --claude-on-primary: #ffffff;
-    --claude-on-dark: #faf9f5;
-    --claude-on-dark-soft: #a09d96;
+    /* Brand / Accent */
+    --geist-link: #0070f3;
+    --geist-link-deep: #0761d1;
+    --geist-link-soft: #d3e5ff;
+    --geist-violet: #7928ca;
+    --geist-cyan: #50e3c2;
+    --geist-pink: #ff0080;
+    --geist-magenta: #eb367f;
 
-    /* ── Semantic ── */
-    --claude-success: #5db872;
-    --claude-warning: #d4a017;
-    --claude-error: #c64545;
+    /* Semantic */
+    --geist-error: #ee0000;
+    --geist-error-deep: #c50000;
+    --geist-warning: #f5a623;
 
-    /* ── Border Radius ── */
-    --claude-radius-xs: 4px;
-    --claude-radius-sm: 6px;
-    --claude-radius-md: 8px;
-    --claude-radius-lg: 12px;
-    --claude-radius-xl: 16px;
-    --claude-radius-pill: 9999px;
+    /* Gradient stops (develop / preview / ship) */
+    --geist-grad-dev-s: #007cf0;
+    --geist-grad-dev-e: #00dfd8;
+    --geist-grad-prev-s: #7928ca;
+    --geist-grad-prev-e: #ff0080;
+    --geist-grad-ship-s: #ff4d4d;
+    --geist-grad-ship-e: #f9cb28;
 
-    /* ── Section Rhythm ── */
-    --claude-section-gap: 96px;
+    /* Radii */
+    --geist-radius-sm: 6px;
+    --geist-radius-md: 12px;
+    --geist-radius-lg: 16px;
+    --geist-radius-pill: 100px;
+    --geist-radius-pill-cat: 64px;
+    --geist-radius-full: 9999px;
   }
 
   .dark {
-    --claude-canvas: #181715;
-    --claude-surface-soft: #1f1e1b;
-    --claude-surface-card: #252320;
-    --claude-surface-cream-strong: #2a2824;
-    --claude-surface-dark: #141413;
-    --claude-surface-dark-elevated: #252320;
-    --claude-surface-dark-soft: #1a1916;
-    --claude-hairline: #33312c;
-    --claude-hairline-soft: #2a2824;
-    --claude-primary: #d4856a;
-    --claude-primary-active: #e09b82;
-    --claude-primary-disabled: #3d3d3a;
-    --claude-ink: #faf9f5;
-    --claude-body-strong: #efe9de;
-    --claude-body: #c4bfb6;
-    --claude-muted: #8e8b82;
-    --claude-muted-soft: #6c6a64;
-    --claude-on-dark: #faf9f5;
-    --claude-on-dark-soft: #a09d96;
+    --geist-canvas: #0a0a0a;
+    --geist-canvas-elevated: #151515;
+    --geist-hairline-soft: #1a1a1a;
+    --geist-ink: #fafafa;
+    --geist-body: #a1a1a1;
+    --geist-mute: #666666;
+    --geist-faint: #555555;
+    --geist-hairline: #1f1f1f;
+    --geist-link: #3291ff;
+    --geist-link-deep: #0070f3;
+    --geist-link-soft: #1a2744;
+    --geist-error: #f73a3a;
+    --geist-violet: #a855f7;
+    --geist-cyan: #2dd4bf;
   }
 }
 
-/* ── Tailwind v4 theme mapping ── */
 @theme {
-  --font-serif: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
   --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-
-  --color-claude-primary: var(--claude-primary);
-  --color-claude-primary-active: var(--claude-primary-active);
-  --color-claude-canvas: var(--claude-canvas);
-  --color-claude-surface-card: var(--claude-surface-card);
-  --color-claude-surface-dark: var(--claude-surface-dark);
-  --color-claude-surface-dark-elevated: var(--claude-surface-dark-elevated);
-  --color-claude-surface-dark-soft: var(--claude-surface-dark-soft);
-  --color-claude-hairline: var(--claude-hairline);
-  --color-claude-ink: var(--claude-ink);
-  --color-claude-body: var(--claude-body);
-  --color-claude-muted: var(--claude-muted);
-  --color-claude-muted-soft: var(--claude-muted-soft);
-  --color-claude-on-primary: var(--claude-on-primary);
-  --color-claude-on-dark: var(--claude-on-dark);
-  --color-claude-on-dark-soft: var(--claude-on-dark-soft);
-  --color-claude-error: var(--claude-error);
-  --color-claude-success: var(--claude-success);
+  --color-geist-canvas: var(--geist-canvas);
+  --color-geist-elevated: var(--geist-canvas-elevated);
+  --color-geist-ink: var(--geist-ink);
+  --color-geist-body: var(--geist-body);
+  --color-geist-mute: var(--geist-mute);
+  --color-geist-hairline: var(--geist-hairline);
+  --color-geist-link: var(--geist-link);
+  --color-geist-error: var(--geist-error);
 }
 
 @layer base {
-
-  /* ── The Canvas ── */
   body {
-    background-color: var(--claude-canvas);
-    color: var(--claude-body);
+    background-color: var(--geist-canvas);
+    color: var(--geist-body);
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    overflow-x: hidden;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 16px;
-    line-height: 1.55;
   }
+  ::selection { background-color: var(--geist-link-soft); color: inherit; }
 
-  ::selection {
-    background-color: rgb(204 120 92 / 0.15);
-    color: inherit;
-  }
-
-  mark {
-    background-color: var(--claude-surface-soft);
-    color: var(--claude-ink);
-    padding: 0.125rem 0.25rem;
-    border-radius: var(--claude-radius-xs);
-  }
-
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--claude-hairline);
-    border-radius: var(--claude-radius-pill);
-  }
-  ::-webkit-scrollbar-thumb:hover { background-color: var(--claude-muted); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--geist-hairline); border-radius: var(--geist-radius-pill); }
 }
 
-/* ═══════════════════════════════════════
-   CLAUDE TYPOGRAPHY SYSTEM
-   ═══════════════════════════════════════ */
-
+/* ═══ TYPOGRAPHY ═══ */
 @layer base {
-  .claude-theme {
-    /* Display XL — 64px, Copernicus weight 400, -1.5px tracking */
-    h1 {
-      font-family: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: 2.5rem;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--claude-ink);
-    }
-
-    /* Display LG — 48px */
-    h2 {
-      font-family: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: 2rem;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--claude-ink);
-    }
-
-    /* Display MD — 36px */
-    h3 {
-      font-family: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: 1.5rem;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      color: var(--claude-ink);
-    }
-
-    /* Title MD — 18px/500, StyreneB (Inter substitute) */
-    h4 {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-weight: 500;
-      font-size: 1.125rem;
-      line-height: 1.4;
-      letter-spacing: 0;
-      color: var(--claude-ink);
-    }
-
-    /* Title SM — 16px/500 */
-    h5 {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-weight: 500;
-      font-size: 1rem;
-      line-height: 1.4;
-      color: var(--claude-ink);
-    }
-
-    /* Body MD — 16px/400, StyreneB */
-    p, li, td, th {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-weight: 400;
-      line-height: 1.55;
-      color: var(--claude-body);
-    }
-
-    small {
-      font-size: 0.75rem;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-
-    /* Links — Coral */
-    a:not([class]) {
-      color: var(--claude-primary);
-      text-decoration: none;
-      transition: color 0.15s ease;
-      &:hover { color: var(--claude-primary-active); }
-      &:active { color: var(--claude-primary-active); }
-    }
-
-    /* Bloquote — Editorial hairline left border */
-    blockquote {
-      border-left: 2px solid var(--claude-hairline);
-      padding-left: 1.5rem;
-      font-style: italic;
-      color: var(--claude-muted);
-      margin: 1.5rem 0;
-    }
-
-    /* Lists */
-    ul { list-style-type: disc; padding-left: 1.5rem; margin: 1rem 0; }
-    ol { list-style-type: decimal; padding-left: 1.5rem; margin: 1rem 0; }
-    li { margin-top: 0.375rem; line-height: 1.7; }
-
-    /* Inline code */
-    code:not(pre code) {
-      font-family: "JetBrains Mono Variable", ui-monospace, monospace;
-      font-size: 0.875em;
-      background-color: var(--claude-surface-soft);
-      padding: 0.15em 0.4em;
-      border-radius: var(--claude-radius-xs);
-      color: var(--claude-ink);
-    }
-
-    /* Pre / Code block wrapper */
-    pre {
-      background-color: var(--claude-surface-dark);
-      border-radius: var(--claude-radius-lg);
-      padding: 0;
-      overflow-x: auto;
-      font-size: 0.875rem;
-      line-height: 1.6;
-    }
-    pre code {
-      background: transparent;
-      padding: 0;
-      color: var(--claude-on-dark);
-    }
+  .geist-theme h1 {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 2rem; line-height: 1.2;
+    letter-spacing: -0.08em;
+    color: var(--geist-ink);
+  }
+  .geist-theme h2 {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem; line-height: 1.3;
+    letter-spacing: -0.04em;
+    color: var(--geist-ink);
+  }
+  .geist-theme h3 {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem; line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--geist-ink);
+  }
+  .geist-theme h4 {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 1rem; line-height: 1.4;
+    color: var(--geist-ink);
+  }
+  .geist-theme p, .geist-theme li {
+    font-size: 0.875rem; line-height: 1.5;
+    color: var(--geist-body);
+  }
+  .geist-theme small {
+    font-size: 0.75rem; font-weight: 400; color: var(--geist-mute);
+  }
+  .geist-theme a:not([class]) {
+    color: var(--geist-link);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .geist-theme a:not([class]):hover { color: var(--geist-link-deep); }
+  .geist-theme blockquote {
+    border-left: 2px solid var(--geist-hairline);
+    padding-left: 1rem;
+    color: var(--geist-mute);
+    margin: 1rem 0;
+  }
+  .geist-theme code:not(pre code) {
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.8125em;
+    background: var(--geist-hairline-soft);
+    padding: 0.125em 0.375em;
+    border-radius: var(--geist-radius-sm);
+    color: var(--geist-ink);
+  }
+  .geist-theme pre {
+    background: var(--geist-canvas-elevated);
+    border: 1px solid var(--geist-hairline);
+    border-radius: var(--geist-radius-md);
+    padding: 0; overflow-x: auto;
+    font-size: 0.875rem;
+  }
+  .geist-theme pre code {
+    background: transparent; padding: 0; color: var(--geist-ink);
   }
 
-  /* Responsive headline scaling */
   @media (min-width: 768px) {
-    .claude-theme h1 { font-size: 3rem; }
-    .claude-theme h2 { font-size: 2.25rem; }
-    .claude-theme h3 { font-size: 1.75rem; }
+    .geist-theme h1 { font-size: 2.5rem; letter-spacing: -0.1em; }
   }
   @media (min-width: 1024px) {
-    .claude-theme h1 { font-size: 4rem; /* display-xl: 64px */ }
+    .geist-theme h1 { font-size: 3rem; letter-spacing: -0.12em; }
   }
 }
 
-/* ═══════════════════════════════════════
-   BUTTON SYSTEM
-   ═══════════════════════════════════════ */
-
+/* ═══ BUTTONS ═══ */
 @layer components {
-  /* button-primary — Signature coral CTA */
-  .claude-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: var(--claude-primary);
-    color: var(--claude-on-primary);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.875rem;       /* 14px */
-    font-weight: 500;
-    line-height: 1;
-    padding: 0.75rem 1.25rem; /* 12px 20px */
-    height: 2.5rem;            /* 40px */
-    border-radius: var(--claude-radius-md); /* 8px */
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-    white-space: nowrap;
+  /* Marketing pill — black */
+  .geist-btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--geist-ink); color: var(--geist-canvas-elevated);
+    font-family: Inter, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
+    padding: 0 14px; height: 2.75rem;
+    border-radius: var(--geist-radius-pill); border: none;
+    cursor: pointer; white-space: nowrap;
+    transition: opacity 0.15s;
   }
-  .claude-btn-primary:hover { background-color: var(--claude-primary-active); }
-  .claude-btn-primary:active { background-color: var(--claude-primary-active); }
-  .claude-btn-primary:disabled {
-    background-color: var(--claude-primary-disabled);
-    cursor: not-allowed;
-  }
+  .geist-btn-primary:hover { opacity: 0.85; }
+  .geist-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* button-secondary — Cream canvas + hairline border */
-  .claude-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: var(--claude-canvas);
-    color: var(--claude-ink);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1;
-    padding: 0.75rem 1.25rem;
-    height: 2.5rem;
-    border-radius: var(--claude-radius-md);
-    border: 1px solid var(--claude-hairline);
-    cursor: pointer;
-    transition: background-color 0.15s ease;
+  /* Marketing pill — white inverted */
+  .geist-btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--geist-canvas-elevated); color: var(--geist-ink);
+    font-family: Inter, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.25;
+    padding: 0 14px; height: 2.75rem;
+    border-radius: var(--geist-radius-pill); border: 1px solid var(--geist-hairline);
+    cursor: pointer; white-space: nowrap;
+    transition: border-color 0.15s;
   }
-  .claude-btn-secondary:hover { background-color: var(--claude-surface-soft); }
+  .geist-btn-secondary:hover { border-color: var(--geist-ink); }
+  .geist-btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* button-secondary-on-dark — Dark surface variant */
-  .claude-btn-secondary-on-dark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: var(--claude-surface-dark-elevated);
-    color: var(--claude-on-dark);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1;
-    padding: 0.75rem 1.25rem;
-    height: 2.5rem;
-    border-radius: var(--claude-radius-md);
-    border: 1px solid var(--claude-hairline);
-    cursor: pointer;
-    transition: background-color 0.15s ease;
+  /* Nav/app button — compact black square */
+  .geist-btn-primary-sm {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--geist-ink); color: var(--geist-canvas-elevated);
+    font-family: Inter, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
+    padding: 0 6px; height: 2rem;
+    border-radius: var(--geist-radius-sm); border: none;
+    cursor: pointer; white-space: nowrap;
+    transition: opacity 0.15s;
   }
-  .claude-btn-secondary-on-dark:hover {
-    background-color: var(--claude-surface-dark-soft);
+  .geist-btn-primary-sm:hover { opacity: 0.85; }
+
+  /* Nav/app button — white ghost square */
+  .geist-btn-ghost-sm {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--geist-canvas-elevated); color: var(--geist-ink);
+    font-family: Inter, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25;
+    padding: 0 6px; height: 2rem;
+    border-radius: var(--geist-radius-sm); border: 1px solid var(--geist-hairline);
+    cursor: pointer; white-space: nowrap;
+    transition: border-color 0.15s;
   }
+  .geist-btn-ghost-sm:hover { border-color: var(--geist-ink); }
 
-  /* button-text-link — Inline text button (nav "Sign in" style) */
-  .claude-btn-text-link {
-    background: none;
-    border: none;
-    color: var(--claude-ink);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.4;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity 0.15s ease;
-  }
-  .claude-btn-text-link:hover { opacity: 0.7; }
-
-  /* text-link — Coral inline body links */
-  .claude-text-link {
-    color: var(--claude-primary);
-    text-decoration: none;
-    font-weight: 400;
-    transition: color 0.15s ease;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-  }
-  .claude-text-link:hover { color: var(--claude-primary-active); }
-
-  /* button-icon-circular — 36px circular icon */
-  .claude-btn-icon-circular {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;   /* 36px */
-    height: 2.25rem;
-    border-radius: 50%;
-    background-color: var(--claude-canvas);
-    border: 1px solid var(--claude-hairline);
-    color: var(--claude-ink);
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-  }
-  .claude-btn-icon-circular:hover { background-color: var(--claude-surface-soft); }
-}
-
-/* ═══════════════════════════════════════
-   BADGE SYSTEM
-   ═══════════════════════════════════════ */
-
-@layer components {
-  /* badge-pill — Light cream tag, 13px/500 */
-  .claude-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;   /* 4px 12px */
-    border-radius: var(--claude-radius-pill);
-    background-color: var(--claude-surface-card);
-    color: var(--claude-ink);
-    font-size: 0.8125rem;        /* 13px */
-    font-weight: 500;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-
-  /* badge-coral — Coral fill, 12px/500 uppercase */
-  .claude-badge-coral {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--claude-radius-pill);
-    background-color: var(--claude-primary);
-    color: var(--claude-on-primary);
-    font-size: 0.75rem;          /* 12px */
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: 0.09375em;   /* 1.5px */
-    text-transform: uppercase;
-    white-space: nowrap;
+  /* Mono uppercase eyebrow */
+  .geist-eyebrow {
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.75rem; font-weight: 500; line-height: 1;
+    text-transform: uppercase; color: var(--geist-mute);
   }
 }
 
-/* ═══════════════════════════════════════
-   INPUT SYSTEM
-   ═══════════════════════════════════════ */
-
+/* ═══ INPUTS ═══ */
 @layer components {
-  /* text-input — 40px, 8px radius, hairline border */
-  .claude-input {
-    background-color: var(--claude-canvas);
-    color: var(--claude-ink);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 1rem;             /* 16px */
-    line-height: 1.55;
-    padding: 0.625rem 0.875rem;  /* 10px 14px */
-    height: 2.5rem;              /* 40px */
-    border-radius: var(--claude-radius-md); /* 8px */
-    border: 1px solid var(--claude-hairline);
-    width: 100%;
-    outline: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  .geist-input {
+    background: var(--geist-canvas-elevated); color: var(--geist-ink);
+    font-family: Inter, sans-serif; font-size: 0.875rem;
+    padding: 0.5rem 0.75rem; height: 2.5rem;
+    border-radius: var(--geist-radius-sm);
+    border: 1px solid var(--geist-hairline);
+    width: 100%; outline: none;
+    transition: border-color 0.15s;
   }
-  .claude-input:focus {
-    border-color: var(--claude-primary);
-    box-shadow: 0 0 0 3px rgb(204 120 92 / 0.15);
-  }
-  .claude-input::placeholder {
-    color: var(--claude-muted-soft);
-  }
-
-  /* Textarea variant */
-  textarea.claude-input {
-    height: auto;
-    min-height: 5rem;
-    resize: vertical;
-    padding: 0.625rem 0.875rem;
-  }
+  .geist-input:focus { border-color: var(--geist-link); }
+  .geist-input::placeholder { color: var(--geist-faint); }
+  textarea.geist-input { height: auto; min-height: 5rem; resize: vertical; }
 }
 
-/* ═══════════════════════════════════════
-   CARD SYSTEM
-   ═══════════════════════════════════════ */
-
+/* ═══ CARDS ═══ */
 @layer components {
-  /* feature-card — Light cream background, 32px padding */
-  .claude-card {
-    background-color: var(--claude-surface-card);
-    border-radius: var(--claude-radius-lg);
-    padding: 2rem;                /* 32px */
-    transition: background-color 0.3s ease;
+  .geist-card {
+    background: var(--geist-canvas-elevated);
+    border: 1px solid var(--geist-hairline);
+    border-radius: var(--geist-radius-md);
+    padding: 1.5rem;
   }
-
-  /* product-mockup-card-dark — Dark navy card */
-  .claude-card-dark {
-    background-color: var(--claude-surface-dark);
-    border-radius: var(--claude-radius-lg);
+  .geist-card-lg {
+    background: var(--geist-canvas-elevated);
+    border: 1px solid var(--geist-hairline);
+    border-radius: var(--geist-radius-lg);
     padding: 2rem;
-    color: var(--claude-on-dark);
-    transition: background-color 0.3s ease;
   }
-
-  /* code-window-card — Dark navy, 24px padding, with inner dark-soft code block */
-  .claude-card-code-window {
-    background-color: var(--claude-surface-dark);
-    border-radius: var(--claude-radius-lg);
-    padding: 1.5rem;              /* 24px */
+  .geist-code-block {
+    background: var(--geist-canvas-elevated);
+    border: 1px solid var(--geist-hairline);
+    border-radius: var(--geist-radius-md);
+    padding: 1rem;
     overflow: hidden;
   }
-  .claude-card-code-window code,
-  .claude-card-code-window pre {
-    background-color: var(--claude-surface-dark-soft);
-  }
-  /* Force Shiki light-on-dark colors inside code-window-card, regardless of page mode */
-  .claude-card-code-window .shiki,
-  .claude-card-code-window .shiki span {
-    color: var(--shiki-dark, var(--claude-on-dark)) !important;
-    background-color: var(--shiki-dark-bg, var(--claude-surface-dark-soft)) !important;
-    font-weight: var(--shiki-dark-font-weight, 400) !important;
-    text-decoration: var(--shiki-dark-text-decoration, none) !important;
-  }
-
-  /* card with hairline border on cream canvas */
-  .claude-card-border {
-    background-color: var(--claude-canvas);
-    border: 1px solid var(--claude-hairline);
-    border-radius: var(--claude-radius-lg);
-    padding: 2rem;
-  }
-
-  /* callout-card-coral — Full coral fill, 48px padding */
-  .claude-card-coral {
-    background-color: var(--claude-primary);
-    color: var(--claude-on-primary);
-    border-radius: var(--claude-radius-lg);
-    padding: 3rem;                /* 48px */
-  }
-
-  /* Section divider — 96px top/bottom rhythm */
-  .claude-section {
-    padding-top: var(--claude-section-gap);
-    padding-bottom: var(--claude-section-gap);
-  }
-
-  /* Hairline divider */
-  .claude-hairline {
-    height: 1px;
-    background-color: var(--claude-hairline);
-    border: none;
-  }
+  .geist-hairline { height: 1px; background: var(--geist-hairline); border: none; }
 }
 
-/* ═══════════════════════════════════════
-   CATEGORY TAB / FILTER
-   ═══════════════════════════════════════ */
+/* KaTeX */
+.tiptap-mathematics-render, .katex { font-size: 1.1em; color: inherit; }
+.tiptap-mathematics-render[data-type="block-math"], .katex-display { margin: 1.5em 0; overflow-x: auto; text-align: center; }
 
-@layer components {
-  .claude-tab {
-    background: transparent;
-    color: var(--claude-muted);
-    padding: 0.5rem 0.875rem;   /* 8px 14px */
-    border-radius: var(--claude-radius-md);
-    font-size: 0.875rem;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.15s ease, color 0.15s ease;
-  }
-  .claude-tab:hover { color: var(--claude-ink); }
-  .claude-tab-active {
-    background-color: var(--claude-surface-card);
-    color: var(--claude-ink);
-  }
+/* Comment highlight */
+@keyframes geist-flash {
+  0% { background: var(--geist-ink); color: var(--geist-canvas-elevated); }
+  15% { background: var(--geist-ink); color: var(--geist-canvas-elevated); }
+  100% { background: transparent; color: inherit; }
 }
+.highlight-active { scroll-margin-top: 6rem; animation: geist-flash 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 
-/* ── KaTeX / Mathematics ── */
-.tiptap-mathematics-render,
-.katex {
-  font-size: 1.1em;
-  color: inherit;
-}
-.tiptap-mathematics-render[data-type="block-math"],
-.katex-display {
-  margin: 1.5em 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  text-align: center;
-}
-
-/* ── Comment Highlight for Anchor Navigation ── */
-@keyframes claude-highlight-flash {
-  0%   { background-color: var(--claude-ink); color: var(--claude-on-dark); }
-  15%  { background-color: var(--claude-ink); color: var(--claude-on-dark); }
-  100% { background-color: transparent; color: inherit; }
-}
-.highlight-active {
-  position: relative;
-  scroll-margin-top: 6rem;
-  animation: claude-highlight-flash 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-/* ── TipTap Placeholder ── */
+/* Tiptap */
+.ProseMirror li > p { margin: 0; }
+.ProseMirror li > p:first-child:last-child { display: inline; }
 .tiptap p.is-editor-empty:first-child::before {
-  color: var(--claude-muted);
-  font-family: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
-  font-style: italic;
-  float: left;
-  height: 0;
-  pointer-events: none;
+  color: var(--geist-mute); font-style: italic; float: left; height: 0; pointer-events: none;
   content: attr(data-placeholder);
 }
 
-/* ── TipTap List Fix ── */
-.ProseMirror li > p { margin: 0; }
-.ProseMirror li > p:first-child:last-child { display: inline; }
+/* Tables */
+.ProseMirror table { border-collapse: collapse; margin: 1rem 0; width: 100%; }
+.ProseMirror td, .ProseMirror th { border: 1px solid var(--geist-hairline); padding: 0.5rem 0.75rem; }
+.ProseMirror th { background: var(--geist-hairline-soft); font-weight: 500; text-align: left; color: var(--geist-mute); }
 
-/* ── Table Styles ── */
-.ProseMirror table { border-collapse: collapse; margin: 1.5rem 0; width: 100%; }
-.ProseMirror td, .ProseMirror th {
-  border: 1px solid var(--claude-hairline); padding: 0.5rem 0.75rem;
-}
-.ProseMirror th {
-  background-color: var(--claude-surface-soft); font-weight: 500; text-align: left; color: var(--claude-muted);
-}
-.ProseMirror .selectedCell:after {
-  background: var(--claude-ink); opacity: 0.08; content: ""; inset: 0; position: absolute; z-index: 2;
-}
-
-/* ── Mathematics in Editor ── */
-.ProseMirror .tiptap-mathematics-render,
-.ProseMirror .katex { font-size: 1.1em; color: inherit; }
-.ProseMirror .tiptap-mathematics-render[data-type="block-math"],
-.ProseMirror .katex-display { margin: 1em 0; overflow-x: auto; overflow-y: hidden; text-align: center; }
-
-/* ── Shiki Dark Mode ── */
-html.dark .shiki,
-html.dark .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+/* Shiki dark override */
+html.dark .shiki, html.dark .shiki span {
+  color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important;
 }

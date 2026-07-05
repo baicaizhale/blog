@@ -1,131 +1,22 @@
-import type { Editor } from "@tiptap/react";
-import { useEditorState } from "@tiptap/react";
-import clsx from "clsx";
-import type { LucideIcon } from "lucide-react";
-import {
-  Bold,
-  Code,
-  Image as ImageIcon,
-  Italic,
-  Link as LinkIcon,
-  Redo,
-  Strikethrough,
-  Underline as UnderlineIcon,
-  Undo,
-} from "lucide-react";
-import type React from "react";
-import { m } from "@/paraglide/messages";
+import type { Editor } from "@tiptap/react"; import { Bold, Code, Image as ImageIcon, Italic, Link as LinkIcon, Redo, Strikethrough, Underline as UnderlineIcon, Undo } from "lucide-react";
 
-interface CommentEditorToolbarProps {
-  editor: Editor;
-  onLinkClick: () => void;
-  onImageClick: () => void;
-}
-
-interface ToolbarButtonProps {
-  onClick: () => void;
-  isActive?: boolean;
-  icon: LucideIcon;
-  label?: string;
-}
-
-const ToolbarButton: React.FC<ToolbarButtonProps> = ({
-  onClick,
-  isActive,
-  icon: Icon,
-  label,
-}) => (
-  <button
-    onClick={onClick}
-    className={clsx(
-      "p-1.5 rounded-[var(--claude-radius-xs)] transition-all duration-200 flex items-center justify-center",
-      isActive
-        ? "bg-[var(--claude-ink)] text-[var(--claude-on-dark)]"
-        : "text-[var(--claude-muted)] hover:bg-[var(--claude-surface-soft)] hover:text-[var(--claude-ink)]",
-    )}
-    title={label}
-    type="button"
-  >
-    <Icon size={14} />
-  </button>
+const TBtn = ({ onClick, isActive, icon: Icon }: any) => (
+  <button onClick={onClick} className={`p-1.5 rounded-[var(--geist-radius-sm)] transition-colors ${isActive ? "bg-[var(--geist-ink)] text-[var(--geist-canvas-elevated)]" : "text-[var(--geist-mute)] hover:bg-[var(--geist-hairline-soft)] hover:text-[var(--geist-ink)]"}`} type="button"><Icon size={14}/></button>
 );
 
-const ToolbarDivider = () => (
-  <div className="w-px h-5 bg-[var(--claude-hairline)] mx-0.5" />
-);
-
-export default function CommentEditorToolbar({
-  editor,
-  onLinkClick,
-  onImageClick,
-}: CommentEditorToolbarProps) {
-  const editorState = useEditorState({
-    editor,
-    selector: (ctx) => ({
-      isBold: ctx.editor?.isActive("bold") ?? false,
-      isItalic: ctx.editor?.isActive("italic") ?? false,
-      isStrike: ctx.editor?.isActive("strike") ?? false,
-      isUnderline: ctx.editor?.isActive("underline") ?? false,
-      isCode: ctx.editor?.isActive("code") ?? false,
-      canUndo: ctx.editor?.can().undo() ?? false,
-      canRedo: ctx.editor?.can().redo() ?? false,
-    }),
-  });
-
-  return (
-    <div className="flex items-center gap-0.5 p-1.5 border-b border-[var(--claude-hairline)] flex-wrap">
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        isActive={editorState.isBold}
-        icon={Bold}
-        label={m.comments_editor_toolbar_bold()}
-      />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        isActive={editorState.isItalic}
-        icon={Italic}
-        label={m.comments_editor_toolbar_italic()}
-      />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleUnderline().run()}
-        isActive={editorState.isUnderline}
-        icon={UnderlineIcon}
-        label={m.comments_editor_toolbar_underline()}
-      />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        isActive={editorState.isStrike}
-        icon={Strikethrough}
-        label={m.comments_editor_toolbar_strike()}
-      />
-      <ToolbarDivider />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        isActive={editorState.isCode}
-        icon={Code}
-        label={m.comments_editor_toolbar_code()}
-      />
-      <ToolbarButton
-        onClick={onLinkClick}
-        icon={LinkIcon}
-        label={m.comments_editor_toolbar_link()}
-      />
-      <ToolbarButton
-        onClick={onImageClick}
-        icon={ImageIcon}
-        label={m.comments_editor_toolbar_image()}
-      />
-      <ToolbarDivider />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().undo().run()}
-        icon={Undo}
-        label={m.comments_editor_toolbar_undo()}
-      />
-      <ToolbarButton
-        onClick={() => editor.chain().focus().redo().run()}
-        icon={Redo}
-        label={m.comments_editor_toolbar_redo()}
-      />
-    </div>
-  );
+export default function CommentEditorToolbar({ editor, onLinkClick, onImageClick }: { editor: Editor; onLinkClick: () => void; onImageClick: () => void }) {
+  const is = (attr: string) => editor.isActive(attr);
+  return (<div className="flex items-center gap-0.5 p-1.5 border-b border-[var(--geist-hairline)] flex-wrap">
+    <TBtn onClick={() => editor.chain().focus().toggleBold().run()} isActive={is("bold")} icon={Bold} />
+    <TBtn onClick={() => editor.chain().focus().toggleItalic().run()} isActive={is("italic")} icon={Italic} />
+    <TBtn onClick={() => editor.chain().focus().toggleUnderline().run()} isActive={is("underline")} icon={UnderlineIcon} />
+    <TBtn onClick={() => editor.chain().focus().toggleStrike().run()} isActive={is("strike")} icon={Strikethrough} />
+    <div className="w-px h-5 bg-[var(--geist-hairline)] mx-0.5" />
+    <TBtn onClick={() => editor.chain().focus().toggleCode().run()} isActive={is("code")} icon={Code} />
+    <TBtn onClick={onLinkClick} icon={LinkIcon} />
+    <TBtn onClick={onImageClick} icon={ImageIcon} />
+    <div className="w-px h-5 bg-[var(--geist-hairline)] mx-0.5" />
+    <TBtn onClick={() => editor.chain().focus().undo().run()} icon={Undo} />
+    <TBtn onClick={() => editor.chain().focus().redo().run()} icon={Redo} />
+  </div>);
 }

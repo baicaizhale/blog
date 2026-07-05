@@ -1,7 +1,6 @@
 import "./styles/index.css";
 import type { ThemeComponents } from "@/features/theme/contract/components";
 import { config } from "./config";
-import { getClaudeThemeStyle } from "./theme-style";
 import Toaster from "@/components/ui/toaster";
 import { PublicLayout } from "./layouts/public-layout";
 import { AuthLayout } from "./layouts/auth-layout";
@@ -19,32 +18,17 @@ import { ResetPasswordPage } from "./pages/auth/reset-password";
 import { VerifyEmailPage } from "./pages/auth/verify-email";
 import { ProfilePage } from "./pages/user/profile";
 
-/**
- * Theme: claude — Claude.com-inspired design system.
- * Cream canvas + coral primary + dark navy surfaces.
- * Implements the full ThemeComponents contract.
- */
 export default {
   config,
-  getDocumentStyle: getClaudeThemeStyle,
-  HomePage,
-  HomePageSkeleton,
-  PostsPage,
-  PostsPageSkeleton,
-  PostPage,
-  PostPageSkeleton,
-  PublicLayout,
-  AuthLayout,
-  UserLayout,
-  FriendLinksPage,
-  FriendLinksPageSkeleton,
-  SearchPage,
-  SubmitFriendLinkPage,
-  LoginPage,
-  RegisterPage,
-  ForgotPasswordPage,
-  ResetPasswordPage,
-  VerifyEmailPage,
+  getDocumentStyle: () => undefined,
+  HomePage, HomePageSkeleton,
+  PostsPage, PostsPageSkeleton,
+  PostPage, PostPageSkeleton,
+  PublicLayout, AuthLayout, UserLayout,
+  FriendLinksPage, FriendLinksPageSkeleton,
+  SearchPage, SubmitFriendLinkPage,
+  LoginPage, RegisterPage, ForgotPasswordPage,
+  ResetPasswordPage, VerifyEmailPage,
   ProfilePage,
   Toaster,
 } satisfies ThemeComponents;

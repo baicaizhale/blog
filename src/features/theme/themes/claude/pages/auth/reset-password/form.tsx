@@ -1,76 +1,17 @@
-import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import type { ResetPasswordFormData } from "@/features/theme/contract/pages";
 import { m } from "@/paraglide/messages";
 
-interface ResetPasswordFormProps {
-  form: ResetPasswordFormData;
-}
+interface ResetPasswordFormProps { form: ResetPasswordFormData; }
 
 export function ResetPasswordForm({ form }: ResetPasswordFormProps) {
   const { register, errors, handleSubmit, isSubmitting } = form;
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <p className="text-sm text-[var(--claude-muted)] font-light leading-relaxed">
-        {m.reset_password_header_desc()}
-      </p>
-
-      <div className="space-y-6">
-        <div className="space-y-2 group">
-          <label
-            htmlFor="new-password"
-            className="text-[10px] font-mono uppercase tracking-widest text-[var(--claude-muted)] group-focus-within:text-[var(--claude-ink)] transition-colors"
-          >
-            {m.reset_password_new_password()}
-          </label>
-          <Input
-            type="password"
-            id="new-password"
-            {...register("password")}
-            className="w-full bg-transparent border-0 border-b border-[var(--claude-hairline)] rounded-none py-3 text-sm font-light focus-visible:ring-0 focus:border-[var(--claude-ink)] focus:outline-none transition-all placeholder:text-[var(--claude-muted-soft)] shadow-none px-0"
-            placeholder={m.login_password_placeholder()}
-          />
-          {errors.password && (
-            <span className="text-[9px] font-mono text-[var(--claude-error)] uppercase tracking-widest mt-1 block">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-
-        <div className="space-y-2 group">
-          <label
-            htmlFor="confirm-password"
-            className="text-[10px] font-mono uppercase tracking-widest text-[var(--claude-muted)] group-focus-within:text-[var(--claude-ink)] transition-colors"
-          >
-            {m.reset_password_confirm_new_password()}
-          </label>
-          <Input
-            type="password"
-            id="confirm-password"
-            {...register("confirmPassword")}
-            className="w-full bg-transparent border-0 border-b border-[var(--claude-hairline)] rounded-none py-3 text-sm font-light focus-visible:ring-0 focus:border-[var(--claude-ink)] focus:outline-none transition-all placeholder:text-[var(--claude-muted-soft)] shadow-none px-0"
-            placeholder={m.login_password_placeholder()}
-          />
-          {errors.confirmPassword && (
-            <span className="text-[9px] font-mono text-[var(--claude-error)] uppercase tracking-widest mt-1 block">
-              {errors.confirmPassword.message}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full claude-btn-primary"
-      >
-        {isSubmitting ? (
-          <Loader2 className="animate-spin" size={14} />
-        ) : (
-          <span>{m.reset_password_submit()}</span>
-        )}
-      </button>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <p className="text-sm text-[var(--geist-body)]">{m.reset_password_header_desc()}</p>
+      <div><label htmlFor="np" className="geist-eyebrow">{m.reset_password_new_password()}</label><Input id="np" type="password" {...register("password")} className="geist-input" placeholder={m.login_password_placeholder()} />{errors.password && <span className="text-xs text-[var(--geist-error)]">{errors.password.message}</span>}</div>
+      <div><label htmlFor="cp" className="geist-eyebrow">{m.reset_password_confirm_new_password()}</label><Input id="cp" type="password" {...register("confirmPassword")} className="geist-input" placeholder={m.login_password_placeholder()} />{errors.confirmPassword && <span className="text-xs text-[var(--geist-error)]">{errors.confirmPassword.message}</span>}</div>
+      <button type="submit" disabled={isSubmitting} className="w-full geist-btn-primary">{isSubmitting ? "Resetting..." : m.reset_password_submit()}</button>
     </form>
   );
 }

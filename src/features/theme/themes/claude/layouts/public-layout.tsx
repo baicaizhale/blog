@@ -1,37 +1,15 @@
-import { useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import type { PublicLayoutProps } from "@/features/theme/contract/layouts";
-import { BackgroundLayer } from "../components/background-layer";
-import { Footer } from "./footer";
-import { MobileMenu } from "./mobile-menu";
 import { Navbar } from "./navbar";
+import { MobileMenu } from "./mobile-menu";
+import { Footer } from "./footer";
 
-export function PublicLayout({
-  children,
-  navOptions,
-  user,
-  isSessionLoading,
-  logout,
-}: PublicLayoutProps) {
-  const { siteConfig } = useRouteContext({ from: "__root__" });
+export function PublicLayout({ children, navOptions, user, isSessionLoading, logout }: PublicLayoutProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <div className="claude-theme min-h-screen flex flex-col bg-[var(--claude-canvas)]">
-      <BackgroundLayer background={siteConfig.theme.claude.background} />
-      <Navbar
-        navOptions={navOptions}
-        onMenuClick={() => setIsMenuOpen(true)}
-        user={user}
-        isLoading={isSessionLoading}
-      />
-      <MobileMenu
-        navOptions={navOptions}
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        user={user}
-        logout={logout}
-      />
+    <div className="geist-theme min-h-screen flex flex-col bg-[var(--geist-canvas)]">
+      <Navbar navOptions={navOptions} onMenuClick={() => setIsMenuOpen(true)} user={user} isLoading={isSessionLoading} />
+      <MobileMenu navOptions={navOptions} isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} user={user} logout={logout} />
       <main className="flex-1">{children}</main>
       <Footer navOptions={navOptions} />
     </div>

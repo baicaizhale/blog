@@ -1,2 +1,1 @@
-export { PostsPage } from "./page";
-export { PostsPageSkeleton } from "./skeleton";
+export { PostsPage } from "./page"; export { PostsPageSkeleton } from "./skeleton";
