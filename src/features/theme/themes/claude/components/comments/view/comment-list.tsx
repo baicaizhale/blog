@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { JSONContent } from "@tiptap/react";
 import type { RootCommentWithReplyCount } from "@/features/comments/comments.schema";
 import { repliesByRootIdInfiniteQuery } from "@/features/comments/queries";
 import { m } from "@/paraglide/messages";
@@ -13,7 +14,7 @@ interface CommentListProps {
   onDelete?: (id: number) => void;
   replyTarget?: { rootId: number; commentId: number; userName: string } | null;
   onCancelReply?: () => void;
-  onSubmitReply?: (content: string) => void;
+  onSubmitReply?: (content: JSONContent) => Promise<void>;
   isSubmittingReply?: boolean;
   initialExpandedRootId?: number;
   highlightCommentId?: number;
@@ -26,7 +27,7 @@ interface RepliesListProps {
   onDelete?: (id: number) => void;
   replyTarget?: { rootId: number; commentId: number; userName: string } | null;
   onCancelReply?: () => void;
-  onSubmitReply?: (content: string) => void;
+  onSubmitReply?: (content: JSONContent) => Promise<void>;
   isSubmittingReply?: boolean;
   highlightCommentId?: number;
 }
