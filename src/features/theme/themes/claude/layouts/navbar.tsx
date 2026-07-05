@@ -19,7 +19,7 @@ export function Navbar({ onMenuClick, user, navOptions, isLoading }: NavbarProps
         isScrolled ? "bg-[var(--geist-canvas)]/90 backdrop-blur-md border-b border-[var(--geist-hairline)]" : "bg-[var(--geist-canvas)]"
       }`}>
         <div className="w-full max-w-[1200px] mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="font-semibold text-[var(--geist-ink)] tracking-tight select-none" style={{ fontSize: "1rem", letterSpacing: "-0.01em" }}>
+          <Link to="/" className="font-semibold text-[var(--geist-ink)] tracking-tight select-none" style={{ fontSize: "1rem", letterSpacing: "-0.02em" }}>
             {siteConfig.theme.claude.navBarName}
           </Link>
 

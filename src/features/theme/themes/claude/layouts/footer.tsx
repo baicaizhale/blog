@@ -12,7 +12,7 @@ export function Footer({ navOptions }: FooterProps) {
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2 md:col-span-1">
-            <span className="font-semibold text-[var(--geist-ink)] tracking-tight" style={{ letterSpacing: "-0.01em" }}>{siteConfig.theme.claude.navBarName}</span>
+            <span className="font-semibold text-[var(--geist-ink)] tracking-tight" style={{ letterSpacing: "-0.02em" }}>{siteConfig.theme.claude.navBarName}</span>
             <p className="text-sm text-[var(--geist-mute)] mt-2 leading-relaxed">{siteConfig.description}</p>
           </div>
           <div>

@@ -5,7 +5,7 @@ import { m } from "@/paraglide/messages";
 export function ProfilePage({ user, profileForm, passwordForm, notification, logout }: ProfilePageProps) {
   return (
     <div className="w-full max-w-[48rem] mx-auto pb-20 px-6">
-      <header className="py-20"><h1 className="text-[2.5rem] md:text-[3rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.03em" }}>{m.profile_title()}</h1></header>
+      <header className="py-20"><h1 className="text-[2.5rem] md:text-[3rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.04em" }}>{m.profile_title()}</h1></header>
       <div className="space-y-12">
         <section className="space-y-4">
           <h2 className="geist-eyebrow">{m.profile_basic_info()}</h2>

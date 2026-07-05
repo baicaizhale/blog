@@ -20,7 +20,7 @@ export function HomePage({ posts, pinnedPosts }: HomePageProps) {
     <div className="w-full max-w-[48rem] mx-auto px-6 pt-20 pb-32">
       <section className="mb-24">
         <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[3rem] font-semibold text-[var(--geist-ink)] leading-tight mb-6"
-            style={{ letterSpacing: "-0.03em" }}>
+            style={{ letterSpacing: "-0.04em" }}>
           {siteConfig.author}
         </h1>
         <p className="text-base md:text-lg text-[var(--geist-body)] leading-relaxed max-w-[36rem] mb-8">

@@ -6,7 +6,7 @@ export function SubmitFriendLinkPage({ myLinks, form }: SubmitFriendLinkPageProp
   return (
     <div className="w-full max-w-[48rem] mx-auto pb-20 px-6">
       <header className="py-20 space-y-4">
-        <h1 className="text-[2.5rem] md:text-[3rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.03em" }}>{m.friend_links_title()}</h1>
+        <h1 className="text-[2.5rem] md:text-[3rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.04em" }}>{m.friend_links_title()}</h1>
         <p className="text-base text-[var(--geist-body)]">{m.friend_links_desc()}</p>
       </header>
       <form onSubmit={form.handleSubmit} className="space-y-4 max-w-lg">
