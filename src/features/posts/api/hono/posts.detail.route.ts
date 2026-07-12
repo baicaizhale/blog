@@ -17,6 +17,9 @@ const route = app.get(
     const result = await PostService.findPostBySlug(getServiceContext(c), {
       slug,
     });
+    if (!result) {
+      return c.json({ message: "Post not found" }, 404);
+    }
     setCacheHeaders(c.res.headers, "public");
     return c.json(result);
   },

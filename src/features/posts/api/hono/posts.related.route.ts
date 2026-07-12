@@ -20,6 +20,9 @@ const route = app.get(
       slug,
       limit,
     });
+    if (!result) {
+      return c.json({ message: "Post not found" }, 404);
+    }
     setCacheHeaders(c.res.headers, "public");
     return c.json(result);
   },
