@@ -43,7 +43,7 @@ export function Footer({ navOptions }: FooterProps) {
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-1 text-xs text-[var(--geist-mute)]">
           <span>{m.footer_copyright({ year: new Date().getFullYear().toString(), author: siteConfig.author })}</span>
           <span className="hidden sm:inline opacity-30">/</span>
-          <span>{m.footer_powered_by()} <a href="https://tanstack.com/start" target="_blank" rel="noreferrer" className="hover:text-[var(--geist-ink)] transition-colors">TanStack Start</a> &amp; <a href="https://github.com/du2333/flare-stack-blog" target="_blank" rel="noreferrer" className="hover:text-[var(--geist-ink)] transition-colors">flare-stack-blog</a></span>
+          <span>{m.footer_powered_by()} <a href="https://github.com/du2333/flare-stack-blog" target="_blank" rel="noreferrer" className="hover:text-[var(--geist-ink)] transition-colors">flare-stack-blog</a></span>
         </div>
       </div>
     </footer>
