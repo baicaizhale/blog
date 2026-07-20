@@ -133,7 +133,7 @@
     color: var(--geist-ink);
   }
   .geist-theme p, .geist-theme li {
-    font-size: 0.875rem; line-height: 1.428;
+    font-size: 1rem; line-height: 1.6;
     color: var(--geist-body);
   }
   .geist-theme small {
