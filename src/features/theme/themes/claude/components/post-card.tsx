@@ -8,9 +8,9 @@ export const PostCard = memo(({ post, pinned, views, isLoadingViews }: PostCardP
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--geist-mute)]">
           <time dateTime={post.publishedAt?.toISOString()}><ClientOnly fallback="-">{formatDate(post.publishedAt)}</ClientOnly></time>
-          {post.tags && post.tags.length > 0 && post.tags.map(tag => <span key={tag.id} className="geist-eyebrow !text-[10px]">{tag.name}</span>)}
-          {pinned && <span className="geist-eyebrow !text-[10px] text-[var(--geist-link)]">Pinned</span>}
-          {isLoadingViews ? <span className="flex items-center gap-1"><Eye size={12} /><Skeleton className="h-3 w-12 rounded" /></span> : views !== undefined ? <span className="flex items-center gap-1"><Eye size={12} />{m.post_views_count({ count: views })}</span> : null}
+          {post.tags && post.tags.length > 0 && <><span className="opacity-30">/</span>{post.tags.map(tag => <span key={tag.id} className="text-[var(--geist-mute)]">#{tag.name}</span>)}</>}
+          {pinned && <><span className="opacity-30">/</span><span className="text-[var(--geist-link)]">Pinned</span></>}
+          {isLoadingViews ? <><span className="opacity-30">/</span><span className="flex items-center gap-1"><Eye size={12} /><Skeleton className="h-3 w-12 rounded" /></span></> : views !== undefined ? <><span className="opacity-30">/</span><span className="flex items-center gap-1"><Eye size={12} />{m.post_views_count({ count: views })}</span></> : null}
         </div>
         <h3 className="text-xl font-semibold text-[var(--geist-ink)] group-hover:text-[var(--geist-link)] transition-colors tracking-tight" style={{ viewTransitionName: `post-title-${post.slug}` }}>{post.title}</h3>
         <p className="text-sm text-[var(--geist-body)] line-clamp-2">{post.summary}</p>
