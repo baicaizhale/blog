@@ -35,23 +35,25 @@ export function PostPage({ post }: PostPageProps) {
       </nav>
 
       <article>
-        <header className="mb-10 space-y-4">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--geist-mute)]">
-            <span className="flex items-center gap-1.5">
-              {m.post_published_at()}: <ClientOnly fallback={<span>-</span>}>{formatDate(post.publishedAt)}</ClientOnly>
-            </span>
-            {post.updatedAt && (
-              <>
-                <span className="opacity-30">/</span>
-                <span className="flex items-center gap-1.5">
-                  {m.post_last_updated()}: <ClientOnly fallback={<span>-</span>}>{formatDate(post.updatedAt)}</ClientOnly>
-                </span>
-              </>
-            )}
-            <span className="opacity-30">/</span><span>{m.read_time({ count: post.readTimeInMinutes })}</span>
-            {post.tags && post.tags.length > 0 && <><span className="opacity-30">/</span>{post.tags.map(tag => <Link key={tag.id} to="/posts" search={{ tagName: tag.name }} className="text-[var(--geist-link)] hover:underline">#{tag.name}</Link>)}</>}
+        <header className="mb-10 space-y-8">
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--geist-mute)]">
+              <span className="flex items-center gap-1.5">
+                {m.post_published_at()}: <ClientOnly fallback={<span>-</span>}>{formatDate(post.publishedAt)}</ClientOnly>
+              </span>
+              {post.updatedAt && (
+                <>
+                  <span className="opacity-30">/</span>
+                  <span className="flex items-center gap-1.5">
+                    {m.post_last_updated()}: <ClientOnly fallback={<span>-</span>}>{formatDate(post.updatedAt)}</ClientOnly>
+                  </span>
+                </>
+              )}
+              <span className="opacity-30">/</span><span>{m.read_time({ count: post.readTimeInMinutes })}</span>
+              {post.tags && post.tags.length > 0 && <><span className="opacity-30">/</span>{post.tags.map(tag => <Link key={tag.id} to="/posts" search={{ tagName: tag.name }} className="text-[var(--geist-link)] hover:underline">#{tag.name}</Link>)}</>}
+            </div>
+            <h1 className="text-[2rem] md:text-[2.5rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.04em", viewTransitionName: `post-title-${post.slug}` }}>{post.title}</h1>
           </div>
-          <h1 className="text-[2rem] md:text-[2.5rem] font-semibold text-[var(--geist-ink)] leading-tight" style={{ letterSpacing: "-0.04em", viewTransitionName: `post-title-${post.slug}` }}>{post.title}</h1>
           {post.summary && <div className="geist-card flex items-start gap-3"><Sparkles size={16} className="shrink-0 mt-0.5 text-[var(--geist-link)]" /><p className="text-sm text-[var(--geist-body)]">{post.summary}</p></div>}
         </header>
 
